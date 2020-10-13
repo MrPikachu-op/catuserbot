@@ -16,15 +16,17 @@ async def cmd_list(event):
         reply_to_id = event.reply_to_msg_id
     input_str = event.pattern_match.group(1)
     if input_str == "text":
-        string = ""
+        string = "Total {count} commands found in catuserbot\n\n"
+        catcount = 0
         for i in sorted(CMD_LIST):
-            string += "⚚" + i + "\n"
+            string += "Command found in Plugin "+ i + " are \n"
             for iter_list in CMD_LIST[i]:
                 string += "    " + str(iter_list)
                 string += "\n"
+                catcount += 1
             string += "\n"
         if len(string) > 4095:
-            data = string
+            data = string.format(count = catcount)
             key = (
                 requests.post(
                     "https://nekobin.com/api/documents", json={"content": data}
@@ -37,17 +39,17 @@ async def cmd_list(event):
             reply_text = f"All commands of the catuserbot are [here]({url})"
             await event.edit(reply_text)
             return
-        await event.edit(string)
+        await event.edit(string.format(count = catcount))
         return
     if input_str:
         if input_str in CMD_LIST:
-            string = "**{count} Commands found in plugin {input_str}:**\n\n"
+            string = "**{count} Commands found in plugin {}:**\n\n".format(input_str)
             catcount = 0
             for i in CMD_LIST[input_str]:
                 string += f"  •  `{i}`"
                 string += "\n"
                 catcount += 1
-            await event.edit(string.format(count=catcount, input_str=input_str))
+            await event.edit(string.format(count=catcount))
         else:
             await event.edit(input_str + " is not a valid plugin!")
     else:
@@ -65,8 +67,8 @@ async def cmd_list(event):
         else:
             string = f"**Userbot Helper.. Provided by {DEFAULTUSER}\nUserbot Helper to reveal all the plugin names\n\n**Do `.help` plugin_name for commands\nDo `.info` plugin_name for usage\n\n"
             for i in sorted(CMD_LIST):
-                string += "◆`" + str(i)
-                string += "`   "
+                string += "◆```" + str(i)
+                string += "```   "
             await event.edit(string)
 
 
@@ -82,11 +84,14 @@ async def info(event):
             await edit_or_reply(event, "Please specify a valid plugin name.")
     else:
         string = "**Please specify which plugin do you want help for !!**\
+            \n**Number of plugins : **{count}\
             \n**Usage:** `.info` <plugin name>\n\n"
+        catcount = 0
         for i in sorted(CMD_HELP):
-            string += "◆`" + str(i)
-            string += "`   "
-        await edit_or_reply(event, string)
+            string += "◆```" + str(i)
+            string += "```   "
+            catcount +=1
+        await edit_or_reply(event, string.format(count=catcount))
 
 
 @borg.on(admin_cmd(pattern="dc"))  # pylint:disable=E0602
