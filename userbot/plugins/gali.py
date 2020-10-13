@@ -24,8 +24,8 @@ async def fuckedd(abusehard):
 async def metoo(e):
     txt = random.choice(catmemes.RENDISTR)
     await edit_or_reply(e, txt)
-    
-    
+
+
 @bot.on(admin_cmd(outgoing=True, pattern="rape$"))
 @bot.on(sudo_cmd(pattern="rape$", allow_sudo=True))
 async def raping(raped):
