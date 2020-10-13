@@ -4,8 +4,8 @@ from .. import CMD_HELP
 from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
-@bot.on(admin_cmd(outgoing=True, pattern="^:/$"))
-@bot.on(sudo_cmd(pattern="^:/$", allow_sudo=True))
+@bot.on(admin_cmd(outgoing=True, pattern="^\:/$"))
+@bot.on(sudo_cmd(pattern="^\:/$", allow_sudo=True))
 async def kek(keks):
     uio = ["/", "\\"]
     for i in range(1, 15):
@@ -14,8 +14,8 @@ async def kek(keks):
         await keks.edit(txt)
 
 
-@bot.on(admin_cmd(outgoing=True, pattern="^-_-$"))
-@bot.on(sudo_cmd(pattern="^-_-$", allow_sudo=True))
+@bot.on(admin_cmd(outgoing=True, pattern="^\-_-$"))
+@bot.on(sudo_cmd(pattern="^\-_-$", allow_sudo=True))
 async def lol(lel):
     okay = "-_-"
     for _ in range(10):
@@ -24,8 +24,8 @@ async def lol(lel):
         await lel.edit(okay)
 
 
-@bot.on(admin_cmd(outgoing=True, pattern="^;_;$"))
-@bot.on(sudo_cmd(pattern="^;_;$", allow_sudo=True))
+@bot.on(admin_cmd(outgoing=True, pattern="^\;_;$"))
+@bot.on(sudo_cmd(pattern="^\;_;$", allow_sudo=True))
 async def fun(e):
     t = ";__;"
     for _ in range(10):
