@@ -139,9 +139,9 @@ async def decide(event):
         )
     )
 
-                        
+
 @bot.on(admin_cmd(pattern=f"shout", outgoing=True))
-@bot.on(sudo_cmd(pattern=f"shout", allow_sudo=True))                       
+@bot.on(sudo_cmd(pattern=f"shout", allow_sudo=True))
 async def shout(args):
     msg = "```"
     messagestr = args.text
@@ -155,9 +155,9 @@ async def shout(args):
     result[0] = text[0]
     result = "".join(result)
     msg = "\n" + result
-    await edit_or_reply(args,"`" + msg + "`")
-                        
-                        
+    await edit_or_reply(args, "`" + msg + "`")
+
+
 @bot.on(admin_cmd(outgoing=True, pattern="owo ?(.*)"))
 @bot.on(sudo_cmd(pattern="owo ?(.*)", allow_sudo=True))
 async def faces(owo):
@@ -178,8 +178,8 @@ async def faces(owo):
     reply_text = reply_text.replace("ove", "uv")
     reply_text += " " + random.choice(catmemes.UWUS)
     await edit_or_reply(owo, reply_text)
-                        
-                        
+
+
 @bot.on(admin_cmd(outgoing=True, pattern="clap(?: |$)(.*)"))
 @bot.on(sudo_cmd(pattern="clap(?: |$)(.*)", allow_sudo=True))
 async def claptext(event):
