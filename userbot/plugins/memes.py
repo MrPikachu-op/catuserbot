@@ -4,18 +4,20 @@
 # Licensed under the Raphielscape Public License, Version 1.b (the "License");
 # you may not use this file except in compliance with the License.
 
-import asyncio
 import random
 import re
+
 import requests
 from cowpy import cow
 from telethon import functions
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
-from ..utils import admin_cmd, register,sudo_cmd , edit_or_reply
+
+from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 from . import ALIVE_NAME, BOTLOG, BOTLOG_CHATID, CMD_HELP, catmemes
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "cat"
+
 
 async def get_user(event):
     # Get the user from argument or replied message.
@@ -49,7 +51,7 @@ async def get_user(event):
 
 
 @bot.on(admin_cmd(outgoing=True, pattern=r"(\w+)say (.*)"))
-@bot.on(sudo_cmd(pattern="(\w+)say (.*)",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="(\w+)say (.*)", allow_sudo=True))
 async def univsaye(cowmsg):
     arg = cowmsg.pattern_match.group(1).lower()
     text = cowmsg.pattern_match.group(2)
@@ -59,11 +61,11 @@ async def univsaye(cowmsg):
         return
     cheese = cow.get_cow(arg)
     cheese = cheese()
-    await edit_or_reply(cowmsg,f"`{cheese.milk(text).replace('`', '´')}`")
+    await edit_or_reply(cowmsg, f"`{cheese.milk(text).replace('`', '´')}`")
 
 
-@bot.on(admin_cmd(pattern="coin ?(.*)",outgoing=True))
-@bot.on(sudo_cmd(pattern="coin ?(.*)",allow_sudo=True))
+@bot.on(admin_cmd(pattern="coin ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="coin ?(.*)", allow_sudo=True))
 async def _(event):
     r = random.randint(1, 100)
     input_str = event.pattern_match.group(1)
@@ -71,28 +73,34 @@ async def _(event):
         input_str = input_str.lower()
     if r % 2 == 1:
         if input_str == "heads":
-            await edit_or_reply(event, "The coin landed on: **Heads**. \n You were correct.")
+            await edit_or_reply(
+                event, "The coin landed on: **Heads**. \n You were correct."
+            )
         elif input_str == "tails":
-            await edit_or_reply(event,
-                "The coin landed on: **Heads**. \n You weren't correct, try again ..."
+            await edit_or_reply(
+                event,
+                "The coin landed on: **Heads**. \n You weren't correct, try again ...",
             )
         else:
-            await edit_or_reply(event,"The coin landed on: **Heads**.")
+            await edit_or_reply(event, "The coin landed on: **Heads**.")
     elif r % 2 == 0:
         if input_str == "tails":
-            await edit_or_reply(event,"The coin landed on: **Tails**. \n You were correct.")
+            await edit_or_reply(
+                event, "The coin landed on: **Tails**. \n You were correct."
+            )
         elif input_str == "heads":
-            await edit_or_reply(event,
-                "The coin landed on: **Tails**. \n You weren't correct, try again ..."
+            await edit_or_reply(
+                event,
+                "The coin landed on: **Tails**. \n You weren't correct, try again ...",
             )
         else:
-            await edit_or_reply(event,"The coin landed on: **Tails**.")
+            await edit_or_reply(event, "The coin landed on: **Tails**.")
     else:
         await edit_or_reply(event, r"¯\_(ツ)_/¯")
 
 
 @bot.on(admin_cmd(pattern=r"slap(?: |$)(.*)", outgoing=True))
-@bot.on(sudo_cmd(pattern="slap(?: |$)(.*)",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="slap(?: |$)(.*)", allow_sudo=True))
 async def who(event):
     replied_user = await get_user(event)
     caption = await catmemes.slap(replied_user, event)
@@ -100,15 +108,15 @@ async def who(event):
     if not message_id_to_reply:
         message_id_to_reply = None
     try:
-        await edit_or_reply(event,caption)
+        await edit_or_reply(event, caption)
     except BaseException:
-        await edit_or_reply(event,
-            "`Can't slap this person, need to fetch some sticks and stones !!`"
+        await edit_or_reply(
+            event, "`Can't slap this person, need to fetch some sticks and stones !!`"
         )
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="(yes|no|maybe|decide)$"))
-@bot.on(sudo_cmd(pattern="(yes|no|maybe|decide)$",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="(yes|no|maybe|decide)$", allow_sudo=True))
 async def decide(event):
     decision = event.pattern_match.group(1).lower()
     message_id = event.reply_to_msg_id or None
@@ -121,19 +129,19 @@ async def decide(event):
         event.chat_id, str(r["answer"]).upper(), reply_to=message_id, file=r["image"]
     )
     await event.client(
-            functions.messages.SaveGifRequest(
-                id=types.InputDocument(
-                    id=sandy.media.document.id,
-                    access_hash=sandy.media.document.access_hash,
-                    file_reference=sandy.media.document.file_reference,
-                ),
-                unsave=True,
-            )
+        functions.messages.SaveGifRequest(
+            id=types.InputDocument(
+                id=sandy.media.document.id,
+                access_hash=sandy.media.document.access_hash,
+                file_reference=sandy.media.document.file_reference,
+            ),
+            unsave=True,
         )
+    )
 
-    
+
 @bot.on(admin_cmd(outgoing=True, pattern="owo ?(.*)"))
-@bot.on(sudo_cmd(pattern="owo ?(.*)",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="owo ?(.*)", allow_sudo=True))
 async def faces(owo):
     textx = await owo.get_reply_message()
     message = owo.pattern_match.group(1)
@@ -142,7 +150,7 @@ async def faces(owo):
     elif textx:
         message = textx.text
     else:
-        await edit_or_reply(owo,"` UwU no text given! `")
+        await edit_or_reply(owo, "` UwU no text given! `")
         return
     reply_text = re.sub(r"(r|l)", "w", message)
     reply_text = re.sub(r"(R|L)", "W", reply_text)
@@ -151,10 +159,11 @@ async def faces(owo):
     reply_text = re.sub(r"\!+", " " + random.choice(catmemes.UWUS), reply_text)
     reply_text = reply_text.replace("ove", "uv")
     reply_text += " " + random.choice(catmemes.UWUS)
-    await edit_or_reply(owo,reply_text)
+    await edit_or_reply(owo, reply_text)
+
 
 @bot.on(admin_cmd(outgoing=True, pattern="clap(?: |$)(.*)"))
-@bot.on(sudo_cmd(pattern="clap(?: |$)(.*)",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="clap(?: |$)(.*)", allow_sudo=True))
 async def claptext(event):
     textx = await event.get_reply_message()
     if event.pattern_match.group(1):
@@ -162,16 +171,16 @@ async def claptext(event):
     elif textx.message:
         query = textx.message
     else:
-        await edit_or_reply( event ,"Hah, I don't clap pointlessly!")
+        await edit_or_reply(event, "Hah, I don't clap pointlessly!")
         return
     reply_text = "👏 "
     reply_text += query.replace(" ", " 👏 ")
     reply_text += " 👏"
-    await edit_or_reply( event ,reply_text)
+    await edit_or_reply(event, reply_text)
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="smk(?: |$)(.*)"))
-@bot.on(sudo_cmd(pattern="smk(?: |$)(.*)",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="smk(?: |$)(.*)", allow_sudo=True))
 async def smrk(smk):
     textx = await smk.get_reply_message()
     if smk.pattern_match.group(1):
@@ -179,18 +188,18 @@ async def smrk(smk):
     elif textx.message:
         message = textx.message
     else:
-        await edit_or_reply( smk ,"ツ")
+        await edit_or_reply(smk, "ツ")
         return
     if message == "dele":
-        await edit_or_reply( smk ,message + "te the hell" + "ツ")
+        await edit_or_reply(smk, message + "te the hell" + "ツ")
     else:
         smirk = " ツ"
         reply_text = message + smirk
-        await edit_or_reply( smk ,reply_text)
+        await edit_or_reply(smk, reply_text)
 
 
 @bot.on(admin_cmd(pattern="ftext (.*)"))
-@bot.on(sudo_cmd(pattern="ftext (.*)",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="ftext (.*)", allow_sudo=True))
 async def payf(event):
     paytext = event.pattern_match.group(1)
     pay = "{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}".format(
@@ -207,103 +216,106 @@ async def payf(event):
         paytext * 2,
         paytext * 2,
     )
-    await edit_or_reply( event ,pay)
+    await edit_or_reply(event, pay)
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="repo$"))
-@bot.on(sudo_cmd(pattern="repo$",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="repo$", allow_sudo=True))
 async def source(e):
-    await edit_or_reply( e ,
-        "Click [here](https://github.com/sandy1709/catuserbot) to open this lit af repo."
+    await edit_or_reply(
+        e,
+        "Click [here](https://github.com/sandy1709/catuserbot) to open this lit af repo.",
     )
 
 
 @bot.on(admin_cmd(pattern="congo$"))
-@bot.on(sudo_cmd(pattern="congo$",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="congo$", allow_sudo=True))
 async def _(e):
     txt = random.choice(catmemes.CONGOREACTS)
-    await edit_or_reply( e ,txt)
+    await edit_or_reply(e, txt)
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="rendi$"))
-@bot.on(sudo_cmd(pattern="rendi$",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="rendi$", allow_sudo=True))
 async def metoo(e):
     txt = random.choice(catmemes.RENDISTR)
-    await edit_or_reply( e ,txt) 
-    
+    await edit_or_reply(e, txt)
+
 
 @bot.on(admin_cmd(outgoing=True, pattern="shg$"))
-@bot.on(sudo_cmd(pattern="shg$",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="shg$", allow_sudo=True))
 async def shrugger(e):
     txt = random.choice(catmemes.SHGS)
-    await edit_or_reply( e ,txt)
+    await edit_or_reply(e, txt)
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="runs$"))
-@bot.on(sudo_cmd(pattern="runs$",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="runs$", allow_sudo=True))
 async def runner_lol(e):
     txt = random.choice(catmemes.RUNSREACTS)
-    await edit_or_reply( e ,txt)
+    await edit_or_reply(e, txt)
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="noob$"))
-@bot.on(sudo_cmd(pattern="noob$",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="noob$", allow_sudo=True))
 async def metoo(e):
     txt = random.choice(catmemes.NOOBSTR)
-    await edit_or_reply( e ,txt)    
+    await edit_or_reply(e, txt)
+
 
 @bot.on(admin_cmd(outgoing=True, pattern="insult$"))
-@bot.on(sudo_cmd(pattern="insult$",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="insult$", allow_sudo=True))
 async def insult(e):
-    txt= random.choice(catmemes.INSULT_STRINGS)
-    await edit_or_reply( e ,txt)
+    txt = random.choice(catmemes.INSULT_STRINGS)
+    await edit_or_reply(e, txt)
 
-    
+
 @bot.on(admin_cmd(outgoing=True, pattern="hey$"))
-@bot.on(sudo_cmd(pattern="hey$",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="hey$", allow_sudo=True))
 async def hoi(e):
-    txt=random.choice(catmemes.HELLOSTR)
-    await edit_or_reply( e ,txt)
+    txt = random.choice(catmemes.HELLOSTR)
+    await edit_or_reply(e, txt)
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="pro$"))
-@bot.on(sudo_cmd(pattern="pro$",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="pro$", allow_sudo=True))
 async def proo(e):
-    txt=random.choice(catmemes.PRO_STRINGS)
-    await edit_or_reply( e ,txt)
+    txt = random.choice(catmemes.PRO_STRINGS)
+    await edit_or_reply(e, txt)
+
 
 @bot.on(admin_cmd(pattern=f"react ?(.*)", outgoing=True))
-@bot.on(sudo_cmd(pattern="react ?(.*)",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="react ?(.*)", allow_sudo=True))
 async def _(e):
     input_str = e.pattern_match.group(1)
     if input_str in "happy":
-        emoticons = catmemes.FACEREACTS[0] 
+        emoticons = catmemes.FACEREACTS[0]
     elif input_str in "think":
-        emoticons = catmemes.FACEREACTS[1] 
+        emoticons = catmemes.FACEREACTS[1]
     elif input_str in "wave":
-        emoticons = catmemes.FACEREACTS[2] 
+        emoticons = catmemes.FACEREACTS[2]
     elif input_str in "wtf":
-        emoticons = catmemes.FACEREACTS[3] 
+        emoticons = catmemes.FACEREACTS[3]
     elif input_str in "love":
-        emoticons = catmemes.FACEREACTS[4] 
+        emoticons = catmemes.FACEREACTS[4]
     elif input_str in "confused":
-        emoticons = catmemes.FACEREACTS[5] 
+        emoticons = catmemes.FACEREACTS[5]
     elif input_str in "dead":
-        emoticons = catmemes.FACEREACTS[6] 
+        emoticons = catmemes.FACEREACTS[6]
     elif input_str in "sad":
-        emoticons = catmemes.FACEREACTS[7] 
+        emoticons = catmemes.FACEREACTS[7]
     elif input_str in "dog":
-        emoticons = catmemes.FACEREACTS[8] 
+        emoticons = catmemes.FACEREACTS[8]
     else:
-        emoticons = catmemes.FACEREACTS[9] 
-    txt=random.choice(emoticons)
-    await edit_or_reply( e ,txt)
+        emoticons = catmemes.FACEREACTS[9]
+    txt = random.choice(emoticons)
+    await edit_or_reply(e, txt)
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="10iq$"))
-@bot.on(sudo_cmd(pattern="10iq$",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="10iq$", allow_sudo=True))
 async def iqless(e):
-    await edit_or_reply( e ,"♿")
+    await edit_or_reply(e, "♿")
 
 
 @bot.on(admin_cmd(pattern="fp$"))
@@ -313,13 +325,14 @@ async def facepalm(e):
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="bt$"))
-@bot.on(sudo_cmd(pattern="bt$",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="bt$", allow_sudo=True))
 async def bluetext(e):
     """ Believe me, you will find this useful. """
     if e.is_group:
-        await edit_or_reply( e ,
+        await edit_or_reply(
+            e,
             "/BLUETEXT /MUST /CLICK.\n"
-            "/ARE /YOU /A /STUPID /ANIMAL /WHICH /IS /ATTRACTED /TO /COLOURS?"
+            "/ARE /YOU /A /STUPID /ANIMAL /WHICH /IS /ATTRACTED /TO /COLOURS?",
         )
 
 
@@ -331,7 +344,7 @@ async def _(event):
 
 
 @bot.on(admin_cmd(pattern="lfy (.*)"))
-@bot.on(sudo_cmd(pattern="lfy (.*)",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="lfy (.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -341,11 +354,12 @@ async def _(event):
     )
     response_api = requests.get(sample_url).text
     if response_api:
-        await edit_or_reply( event , 
-            "[{}]({})\n`Thank me Later 🙃` ".format(input_str, response_api.rstrip())
+        await edit_or_reply(
+            event,
+            "[{}]({})\n`Thank me Later 🙃` ".format(input_str, response_api.rstrip()),
         )
     else:
-        await edit_or_reply( event , "something is wrong. please try again later.")
+        await edit_or_reply(event, "something is wrong. please try again later.")
     if BOTLOG:
         await bot.send_message(
             BOTLOG_CHATID,

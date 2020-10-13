@@ -1,6 +1,6 @@
 import asyncio
-from ..utils import admin_cmd, register,sudo_cmd , edit_or_reply
-from . import  CMD_HELP
+
+from ..utils import admin_cmd, edit_or_reply, register, sudo_cmd
 
 
 @register(outgoing=True, pattern="^:/$")
@@ -36,10 +36,10 @@ async def fun(e):
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="oof$"))
-@bot.on(sudo_cmd(pattern="oof$",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="oof$", allow_sudo=True))
 async def Oof(e):
     t = "Oof"
-    catevent = await edit_or_reply(e , t)
+    catevent = await edit_or_reply(e, t)
     for _ in range(15):
         await asyncio.sleep(0.3)
         t = t[:-1] + "of"
@@ -47,13 +47,13 @@ async def Oof(e):
 
 
 @bot.on(admin_cmd(pattern="type (.*)"))
-@bot.on(sudo_cmd(pattern="type (.*)",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="type (.*)", allow_sudo=True))
 async def typewriter(typew):
     message = typew.pattern_match.group(1)
     sleep_time = 0.2
     typing_symbol = "|"
     old_text = ""
-    typew = await edit_or_reply( typew , typing_symbol)
+    typew = await edit_or_reply(typew, typing_symbol)
     await asyncio.sleep(sleep_time)
     for character in message:
         old_text = old_text + "" + character
@@ -71,8 +71,8 @@ async def meme(event):
     sleepValue = 0.5
     memeVar = memeVar[6:]
     if not memeVar:
-        memevar = "✈️"
-    event = await edit_or_reply(event ,"-------------" + memeVar)
+        pass
+    event = await edit_or_reply(event, "-------------" + memeVar)
     await asyncio.sleep(sleepValue)
     await event.edit("------------" + memeVar + "-")
     await asyncio.sleep(sleepValue)
@@ -131,7 +131,6 @@ async def meme(event):
     await event.edit(memeVar)
 
 
-
 @bot.on(admin_cmd(pattern=f"give", outgoing=True))
 @bot.on(sudo_cmd(pattern=f"give", allow_sudo=True))
 async def give(event):
@@ -142,7 +141,7 @@ async def give(event):
     lp = giveVar[6:]
     if not lp:
         lp = " 🍭"
-    event = await edit_or_reply(event ,lp + "        " )
+    event = await edit_or_reply(event, lp + "        ")
     await asyncio.sleep(sleepValue)
     await event.edit(lp + lp + "       ")
     await asyncio.sleep(sleepValue)
