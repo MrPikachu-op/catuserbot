@@ -79,7 +79,10 @@ async def _(event):
         path = Path(input_str)
         if os.path.exists(path):
             start = datetime.now()
-            destination = s.path.join(Config.TMP_DOWNLOAD_DIRECTORY , os.path.splittext(os.path.basename(path))[0])
+            destination = s.path.join(
+                Config.TMP_DOWNLOAD_DIRECTORY,
+                os.path.splittext(os.path.basename(path))[0],
+            )
             with zipfile.ZipFile(path, "r") as zip_ref:
                 zip_ref.extractall(destination)
             end = datetime.now()
@@ -108,7 +111,10 @@ async def _(event):
             except Exception as e:  # pylint:disable=C0103,W0703
                 await mone.edit(str(e))
             await mone.edit("Unzipping now")
-            destination = s.path.join(Config.TMP_DOWNLOAD_DIRECTORY , os.path.splittext(os.path.basename(path))[0])
+            destination = s.path.join(
+                Config.TMP_DOWNLOAD_DIRECTORY,
+                os.path.splittext(os.path.basename(path))[0],
+            )
             with zipfile.ZipFile(path, "r") as zip_ref:
                 zip_ref.extractall(destination)
             end = datetime.now()
