@@ -16,7 +16,7 @@ async def cmd_list(event):
         reply_to_id = event.reply_to_msg_id
     input_str = event.pattern_match.group(1)
     if input_str == "text":
-        string = "Total {count} commands found in {plugincount} of catuserbot\n\n"
+        string = "Total {count} commands found in {plugincount} plugins of catuserbot\n\n"
         catcount = 0
         plugincount = 0
         for i in sorted(CMD_LIST):
@@ -118,7 +118,7 @@ async def _(event):
 async def info(event):
     input_str = event.pattern_match.group(1)
     if input_str == "text":
-        string = "Total {count} commands found in {plugincount} of catuserbot\n\n"
+        string = "Total {count} commands found in {plugincount} sudo plugins of catuserbot\n\n"
         catcount = 0
         plugincount = 0
         for i in sorted(SUDO_LIST):
