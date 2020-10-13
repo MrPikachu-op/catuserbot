@@ -83,8 +83,9 @@ async def _(event):
                 zip_ref.extractall(Config.TMP_DOWNLOAD_DIRECTORY)
             end = datetime.now()
             ms = (end - start).seconds
+            downloaded_file_name = os.path.splitext(path)[0]
             await mone.edit(
-                f"unzipped and stored to `{downloaded_file_name[:-4]}` \n**Time Taken :** `{ms} seconds`"
+                f"unzipped and stored to `{downloaded_file_name}` \n**Time Taken :** `{ms} seconds`"
             )
         else:
             await mone.edit(f"I can't find that path `{input_str}`")
