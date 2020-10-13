@@ -179,7 +179,30 @@ async def give(event):
     await asyncio.sleep(sleepValue)
     await event.edit(lp + lp + lp + lp + lp + lp + lp + lp + lp)
 
-
+@bot.on(admin_cmd(pattern=f"sadmin$", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"sadmin$", allow_sudo=True))
+async def _(event):
+    animation_ttl = range(13)
+    event = await edit_or_reply(event , "sadmin")
+    animation_chars = [
+        "@aaaaaaaaaaaaadddddddddddddmmmmmmmmmmmmmiiiiiiiiiiiiinnnnnnnnnnnnn",
+        "@aaaaaaaaaaaaddddddddddddmmmmmmmmmmmmiiiiiiiiiiiinnnnnnnnnnnn",
+        "@aaaaaaaaaaadddddddddddmmmmmmmmmmmiiiiiiiiiiinnnnnnnnnnn",
+        "@aaaaaaaaaaddddddddddmmmmmmmmmmiiiiiiiiiinnnnnnnnnn",
+        "@aaaaaaaaadddddddddmmmmmmmmmiiiiiiiiinnnnnnnnn",
+        "@aaaaaaaaddddddddmmmmmmmmiiiiiiiinnnnnnnn",
+        "@aaaaaaadddddddmmmmmmmiiiiiiinnnnnnn",
+        "@aaaaaaddddddmmmmmmiiiiiinnnnnn",
+        "@aaaaadddddmmmmmiiiiinnnnn",
+        "@aaaaddddmmmmiiiinnnn",
+        "@aaadddmmmiiinnn",
+        "@aaddmmiinn",
+        "@admin",
+    ]
+    for i in animation_ttl:
+        await asyncio.sleep(1)
+        await event.edit(animation_chars[i % 13])
+        
 CMD_HELP.update(
     {
         "meme": "**Plugin : **`meme`\
@@ -197,6 +220,8 @@ CMD_HELP.update(
         \n__The above two commands are animation memes meme by default takes ✈️ and give by default takes 🍭__\
         \n\n**Syntax :** `.type`\
         \n**Usage : **Just a small command to make your keyboard become a typewriter!\
+        \n\n**Syntax :** `.sadmin`\
+        \n**Usage : **Fun animation of @admin!\
         "
     }
 )
