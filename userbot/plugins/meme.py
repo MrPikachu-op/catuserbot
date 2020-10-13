@@ -1,38 +1,35 @@
 import asyncio
-
+from . import CMD_HELP
 from ..utils import admin_cmd, edit_or_reply, register, sudo_cmd
 
-
-@register(outgoing=True, pattern="^:/$")
+@bot.on(admin_cmd(outgoing=True, pattern="^:/$"))
+@bot.on(sudo_cmd(pattern="^:/$", allow_sudo=True))
 async def kek(keks):
-    """ Check yourself ;)"""
-    if not keks.text[0].isalpha() and keks.text[0] not in ("/", "#", "@", "!"):
-        uio = ["/", "\\"]
-        for i in range(1, 15):
-            await asyncio.sleep(0.3)
-            txt = ":" + uio[i % 2]
-            await keks.edit(txt)
+    uio = ["/", "\\"]
+    for i in range(1, 15):
+        await asyncio.sleep(0.3)
+        txt = ":" + uio[i % 2]
+        await keks.edit(txt)
 
 
-@register(outgoing=True, pattern="^-_-$")
+@bot.on(admin_cmd(outgoing=True, pattern="^-_-$"))
+@bot.on(sudo_cmd(pattern="^-_-$", allow_sudo=True))
 async def lol(lel):
-    """ Ok... """
-    if not lel.text[0].isalpha() and lel.text[0] not in ("/", "#", "@", "!"):
-        okay = "-_-"
-        for _ in range(10):
-            await asyncio.sleep(0.3)
-            okay = okay[:-1] + "_-"
-            await lel.edit(okay)
+    okay = "-_-"
+    for _ in range(10):
+        await asyncio.sleep(0.3)
+        okay = okay[:-1] + "_-"
+        await lel.edit(okay)
 
 
-@register(outgoing=True, pattern="^;_;")
+@bot.on(admin_cmd(outgoing=True, pattern="^;_;$"))
+@bot.on(sudo_cmd(pattern="^;_;$", allow_sudo=True))
 async def fun(e):
-    if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
-        t = ";__;"
-        for _ in range(10):
-            await asyncio.sleep(0.3)
-            t = t[:-1] + "_;"
-            await e.edit(t)
+    t = ";__;"
+    for _ in range(10):
+        await asyncio.sleep(0.3)
+        t = t[:-1] + "_;"
+        await e.edit(t)
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="oof$"))
@@ -46,7 +43,7 @@ async def Oof(e):
         await catevent.edit(t)
 
 
-@bot.on(admin_cmd(pattern="type (.*)"))
+@bot.on(admin_cmd(outgoing=True, pattern="type (.*)"))
 @bot.on(sudo_cmd(pattern="type (.*)", allow_sudo=True))
 async def typewriter(typew):
     message = typew.pattern_match.group(1)
@@ -176,3 +173,22 @@ async def give(event):
     await event.edit(lp + lp + lp + lp + lp + lp + lp + lp + " ")
     await asyncio.sleep(sleepValue)
     await event.edit(lp + lp + lp + lp + lp + lp + lp + lp + lp)
+
+cmd_help.update({
+        "meme":"**Plugin : **`meme`\
+        \n\n**Commands :**\
+        \n  •  `:/`\
+        \n  •  `-_-`\
+        \n  •  `;_;`\
+        \n  •  `.oof`\
+        \n\n**Functions :**\
+        \n__The above four commands are animation commands__\
+        \n\n**Commands :**\
+        \n  •  `.meme`\
+        \n  •  `.give`\
+        \n\n**Functions :**\
+        \n__The above two commands are animation memes meme by default takes ✈️ and give by default takes 🍭__\
+        \n\n**Syntax :** `.type`\
+        \n**Usage : **Just a small command to make your keyboard become a typewriter!\
+        "
+})
