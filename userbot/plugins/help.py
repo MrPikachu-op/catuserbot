@@ -84,12 +84,12 @@ async def info(event):
             await edit_or_reply(event, "Please specify a valid plugin name.")
     else:
         string = "**Please specify which plugin do you want help for !!**\
-            \n**Number of plugins : **{count}\
+            \n**Number of plugins : **`{count}`\
             \n**Usage:** `.info` <plugin name>\n\n"
         catcount = 0
         for i in sorted(CMD_HELP):
-            string += "◆```" + str(i)
-            string += "```   "
+            string += "◆" + f"`{str(i)}`"
+            string += "   "
             catcount += 1
         await edit_or_reply(event, string.format(count=catcount))
 
