@@ -85,7 +85,7 @@ async def _(event):
                 )
             destination = os.path.join(
                 Config.TMP_DOWNLOAD_DIRECTORY,
-                os.path.splittext(os.path.basename(str(path)))[0],
+                os.path.splittext(str(os.path.basename(str(path))))[0],
             )
             with zipfile.ZipFile(path, "r") as zip_ref:
                 zip_ref.extractall(destination)
@@ -120,7 +120,7 @@ async def _(event):
                 )
             destination = os.path.join(
                 Config.TMP_DOWNLOAD_DIRECTORY,
-                os.path.splittext(os.path.basename(path))[0],
+                os.path.splittext(str(os.path.basename(path)))[0],
             )
             with zipfile.ZipFile(path, "r") as zip_ref:
                 zip_ref.extractall(destination)
