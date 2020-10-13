@@ -24,12 +24,13 @@ thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "thumb_image.jpg"
 if Config.THUMB_IMAGE:
     with open(thumb_image_path, "wb") as f:
         f.write(requests.get(Config.THUMB_IMAGE).content)
-    
+
 cat_users = [bot.uid]
 if Config.SUDO_USERS:
     for user in Config.SUDO_USERS:
         cat_users.append(user)
-    
+
+
 def check(cat):
     if "/start" in cat:
         return True
