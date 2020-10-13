@@ -115,4 +115,3 @@ LOAD_PLUG = {}
 
 from .helpers import *
 from .helpers import functions as catdef
-from .helpers import memeshelper as memes
