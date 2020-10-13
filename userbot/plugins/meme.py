@@ -1,6 +1,7 @@
 import asyncio
-from . import CMD_HELP
-from ..utils import admin_cmd, edit_or_reply, register, sudo_cmd
+
+from ..utils import admin_cmd, edit_or_reply, sudo_cmd
+
 
 @bot.on(admin_cmd(outgoing=True, pattern="^:/$"))
 @bot.on(sudo_cmd(pattern="^:/$", allow_sudo=True))
@@ -174,8 +175,10 @@ async def give(event):
     await asyncio.sleep(sleepValue)
     await event.edit(lp + lp + lp + lp + lp + lp + lp + lp + lp)
 
-cmd_help.update({
-        "meme":"**Plugin : **`meme`\
+
+cmd_help.update(
+    {
+        "meme": "**Plugin : **`meme`\
         \n\n**Commands :**\
         \n  •  `:/`\
         \n  •  `-_-`\
@@ -191,4 +194,5 @@ cmd_help.update({
         \n\n**Syntax :** `.type`\
         \n**Usage : **Just a small command to make your keyboard become a typewriter!\
         "
-})
+    }
+)
