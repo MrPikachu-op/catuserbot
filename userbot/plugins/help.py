@@ -19,14 +19,14 @@ async def cmd_list(event):
         string = "Total {count} commands found in catuserbot\n\n"
         catcount = 0
         for i in sorted(CMD_LIST):
-            string += "Command found in Plugin "+ i + " are \n"
+            string += "Command found in Plugin " + i + " are \n"
             for iter_list in CMD_LIST[i]:
                 string += "    " + str(iter_list)
                 string += "\n"
                 catcount += 1
             string += "\n"
         if len(string) > 4095:
-            data = string.format(count = catcount)
+            data = string.format(count=catcount)
             key = (
                 requests.post(
                     "https://nekobin.com/api/documents", json={"content": data}
@@ -39,7 +39,7 @@ async def cmd_list(event):
             reply_text = f"All commands of the catuserbot are [here]({url})"
             await event.edit(reply_text)
             return
-        await event.edit(string.format(count = catcount))
+        await event.edit(string.format(count=catcount))
         return
     if input_str:
         if input_str in CMD_LIST:
@@ -49,7 +49,7 @@ async def cmd_list(event):
                 string += f"  •  `{i}`"
                 string += "\n"
                 catcount += 1
-            await event.edit(string.format(count=catcount,input_str=input_str))
+            await event.edit(string.format(count=catcount, input_str=input_str))
         else:
             await event.edit(input_str + " is not a valid plugin!")
     else:
@@ -90,7 +90,7 @@ async def info(event):
         for i in sorted(CMD_HELP):
             string += "◆```" + str(i)
             string += "```   "
-            catcount +=1
+            catcount += 1
         await edit_or_reply(event, string.format(count=catcount))
 
 
