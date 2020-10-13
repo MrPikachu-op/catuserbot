@@ -1,3 +1,28 @@
+import random
+
+async def slap(replied_user, event):
+    """ Construct a funny slap sentence !! """
+    user_id = replied_user.user.id
+    first_name = replied_user.user.first_name
+    username = replied_user.user.username
+    if username:
+        slapped = "@{}".format(username)
+    else:
+        slapped = f"[{first_name}](tg://user?id={user_id})"
+    temp = random.choice(SLAP_TEMPLATES)
+    item = random.choice(ITEMS)
+    hit = random.choice(HIT)
+    throw = random.choice(THROW)
+    where = random.choice(WHERE)
+    return temp.format(
+        user1=DEFAULTUSER,
+        victim=slapped,
+        item=item,
+        hits=hit,
+        throws=throw,
+        where=where,
+    )
+
 RENDISTR = [
     "`I Know Uh ez Rendi Bhay Dont show Your Randi Pesa Here`",
     "`Jag Suna suna laage Sab #maderchod bhay`",
@@ -24,6 +49,18 @@ NOOBSTR = [
     "`Zikr Jinka hota hai galiyo meh woh bhosdika ajj paya gya naliyo me`",
 ]
 
+CONGOREACTS = [
+    "`Congratulations and BRAVO!`",
+    "`You did it! So proud of you!`",
+    "`This calls for celebrating! Congratulations!`",
+    "`I knew it was only a matter of time. Well done!`",
+    "`Congratulations on your well-deserved success.`",
+    "`Heartfelt congratulations to you.`",
+    "`Warmest congratulations on your achievement.`",
+    "`Congratulations and best wishes for your next adventure!”`",
+    "`So pleased to see you accomplishing great things.`",
+    "`Feeling so much joy for you today. What an impressive achievement!`",
+]
 
 INSULT_STRINGS = [
     "Active Volcano is the best swimming pool for you.",
@@ -116,7 +153,80 @@ UWUS = [
 ]
 
 FACEREACTS = [
-    "ʘ‿ʘ",
+    [
+            "( ͡° ͜ʖ ͡°)",
+            "(ʘ‿ʘ)",
+            "(✿´‿`)",
+            "=͟͟͞͞٩(๑☉ᴗ☉)੭ु⁾⁾",
+            "(*⌒▽⌒*)θ～♪",
+            "°˖✧◝(⁰▿⁰)◜✧˖°",
+            "✌(-‿-)✌",
+            "⌒°(❛ᴗ❛)°⌒",
+            "(ﾟ<|＼(･ω･)／|>ﾟ)",
+            "ヾ(o✪‿✪o)ｼ",
+    ],[
+            "(҂⌣̀_⌣́)",
+            "（；¬＿¬)",
+            "(-｡-;",
+            "┌[ O ʖ̯ O ]┐",
+            "〳 ͡° Ĺ̯ ͡° 〵",
+    ],[
+            "(ノ^∇^)",
+            "(;-_-)/",
+            "@(o・ェ・)@ノ",
+            "ヾ(＾-＾)ノ",
+            "ヾ(◍’౪`◍)ﾉﾞ♡",
+            "(ό‿ὸ)ﾉ",
+            "(ヾ(´・ω・｀)",
+    ],[
+            "༎ຶ‿༎ຶ",
+            "(‿ˠ‿)",
+            "╰U╯☜(◉ɷ◉ )",
+            "(;´༎ຶ益༎ຶ`)♡",
+            "╭∩╮(︶ε︶*)chu",
+            "( ＾◡＾)っ (‿|‿)",
+    ],[
+            "乂❤‿❤乂",
+            "(｡♥‿♥｡)",
+            "( ͡~ ͜ʖ ͡°)",
+            "໒( ♥ ◡ ♥ )७",
+            "༼♥ل͜♥༽",
+    ],[
+            "(・_・ヾ",
+            "｢(ﾟﾍﾟ)",
+            "﴾͡๏̯͡๏﴿",
+            "(￣■￣;)!?",
+            "▐ ˵ ͠° (oo) °͠ ˵ ▐",
+            "(-_-)ゞ゛",
+        ],[
+            "(✖╭╮✖)",
+            "✖‿✖",
+            "(+_+)",
+            "(✖﹏✖)",
+            "∑(✘Д✘๑)",
+        ],[
+            "(＠´＿｀＠)",
+            "⊙︿⊙",
+            "(▰˘︹˘▰)",
+            "●︿●",
+            "(　´_ﾉ` )",
+            "彡(-_-;)彡",
+        ],[
+            "-ᄒᴥᄒ-",
+            "◖⚆ᴥ⚆◗",
+        ],[
+            "( ͡° ͜ʖ ͡°)",
+            r"¯\_(ツ)_/¯",
+            "( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°)",
+            "ʕ•ᴥ•ʔ",
+            "(▀̿Ĺ̯▀̿ ̿)",
+            "(ง ͠° ͟ل͜ ͡°)ง",
+            "༼ つ ◕_◕ ༽つ",
+            "ಠ_ಠ",
+            "(☞ ͡° ͜ʖ ͡°)☞",
+            r"¯\_༼ ି ~ ି ༽_/¯",
+            "c༼ ͡° ͜ʖ ͡° ༽⊃",
+            "ʘ‿ʘ",
     "ヾ(-_- )ゞ",
     "(っ˘ڡ˘ς)",
     "(´ж｀ς)",
@@ -215,6 +325,7 @@ FACEREACTS = [
     "（　ﾟДﾟ）",
     r"¯\(°_o)/¯",
     "(｡◕‿◕｡)",
+]
 ]
 
 RUNSREACTS = [
