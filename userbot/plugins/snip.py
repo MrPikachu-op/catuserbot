@@ -1,14 +1,13 @@
- # ported from paperplaneExtended by avinashreddy3108 for media support
+# ported from paperplaneExtended by avinashreddy3108 for media support
 
 from telethon import events
-from telethon.tl import types
 
-from . import BOTLOG_CHATID, CMD_HELP, cat_users
 from ..utils import admin_cmd, edit_or_reply, sudo_cmd
+from . import BOTLOG_CHATID, CMD_HELP, cat_users
 from .sql_helper.snip_sql import add_note, get_note, get_notes, rm_note
 
 
-@bot.on(events.NewMessage(pattern=r"\#(\S+)",from_users=cat_users))
+@bot.on(events.NewMessage(pattern=r"\#(\S+)", from_users=cat_users))
 async def incom_note(getnt):
     try:
         if not (await getnt.get_sender()).bot:
