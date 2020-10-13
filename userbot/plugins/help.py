@@ -41,9 +41,9 @@ async def cmd_list(event):
         return
     if input_str:
         if input_str in CMD_LIST:
-            string = "Commands found in {}:\n".format(input_str)
+            string = "**Commands found in plugin {}:**\n\n".format(input_str)
             for i in CMD_LIST[input_str]:
-                string += "    " + i
+                string += f"  •  `{i}`"
                 string += "\n"
             await event.edit(string)
         else:
@@ -114,9 +114,9 @@ async def info(event):
     if args:
         if args in SUDO_LIST:
             if input_str in SUDO_LIST:
-                string = "Commands found in {}:\n".format(input_str)
-                for i in SUDO_LIST[input_str]:
-                    string += "    " + i
+                string = "**Commands found in plugin {}:**\n\n".format(input_str)
+                for i in CMD_LIST[input_str]:
+                    string += f"  •  `{i}`"
                     string += "\n"
                 await event.reply(string)
         else:
