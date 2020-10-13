@@ -179,11 +179,12 @@ async def give(event):
     await asyncio.sleep(sleepValue)
     await event.edit(lp + lp + lp + lp + lp + lp + lp + lp + lp)
 
+
 @bot.on(admin_cmd(pattern=f"sadmin$", outgoing=True))
 @bot.on(sudo_cmd(pattern=f"sadmin$", allow_sudo=True))
 async def _(event):
     animation_ttl = range(13)
-    event = await edit_or_reply(event , "sadmin")
+    event = await edit_or_reply(event, "sadmin")
     animation_chars = [
         "@aaaaaaaaaaaaadddddddddddddmmmmmmmmmmmmmiiiiiiiiiiiiinnnnnnnnnnnnn",
         "@aaaaaaaaaaaaddddddddddddmmmmmmmmmmmmiiiiiiiiiiiinnnnnnnnnnnn",
@@ -202,7 +203,8 @@ async def _(event):
     for i in animation_ttl:
         await asyncio.sleep(1)
         await event.edit(animation_chars[i % 13])
-        
+
+
 CMD_HELP.update(
     {
         "meme": "**Plugin : **`meme`\
