@@ -80,7 +80,9 @@ async def _(event):
         if os.path.exists(path):
             start = datetime.now()
             if not zipfile.is_zipfile(path):
-                await mone.edit(f"`the given file {str(path)} is not zip file to unzip`")
+                await mone.edit(
+                    f"`the given file {str(path)} is not zip file to unzip`"
+                )
             destination = os.path.join(
                 Config.TMP_DOWNLOAD_DIRECTORY,
                 os.path.splittext(os.path.basename(str(path)))[0],
@@ -109,11 +111,13 @@ async def _(event):
                         progress(d, t, mone, c_time, "trying to download")
                     ),
                 )
-            except Exception as e: 
+            except Exception as e:
                 await mone.edit(str(e))
             await mone.edit("Unzipping now")
             if not zipfile.is_zipfile(path):
-                await mone.edit(f"`the given file {str(path)} is not zip file to unzip`")
+                await mone.edit(
+                    f"`the given file {str(path)} is not zip file to unzip`"
+                )
             destination = os.path.join(
                 Config.TMP_DOWNLOAD_DIRECTORY,
                 os.path.splittext(os.path.basename(path))[0],
@@ -286,7 +290,7 @@ async def _(event):
                     progress(d, t, mone, c_time, "trying to download")
                 ),
             )
-        except Exception as e: 
+        except Exception as e:
             await mone.edit(str(e))
         else:
             end = datetime.now()
