@@ -80,17 +80,17 @@ CMD_HELP.update(
     {
         "gali": "**plugin : **`gali`\
         \n\n**Commands :**\
-        \n  •  `abuse`\
-        \n  •  `abusehard`\
-        \n  •  `rape`\
-        \n  •  `fuck`\
-        \n  •  `thanos`\
-        \n  •  `kiss`\
-        \n  •  `fuk`\
-        \n  •  `sex`\
+        \n  •  `.abuse`\
+        \n  •  `.abusehard`\
+        \n  •  `.rape`\
+        \n  •  `.fuck`\
+        \n  •  `.thanos`\
+        \n  •  `.kiss`\
+        \n  •  `.fuk`\
+        \n  •  `.sex`\
         \n\n**Function :**\
         \n__First 5 are random gali string generaters__\
-        \n__Last 3 are animations\
+        \n__Last 3 are animations__\
         "
     }
 )
