@@ -1,5 +1,5 @@
 import asyncio
-
+import random
 from . import CMD_HELP, catmemes
 from .utils import admin_cmd, edit_or_reply, sudo_cmd
 
@@ -7,40 +7,35 @@ from .utils import admin_cmd, edit_or_reply, sudo_cmd
 @bot.on(admin_cmd(outgoing=True, pattern="abuse$"))
 @bot.on(sudo_cmd(pattern="abuse$", allow_sudo=True))
 async def abusing(abused):
-    index = random.randint(0, len(catmemes.ABUSE_STRINGS) - 1)
-    reply_text = catmemes.ABUSE_STRINGS[index]
+    reply_text = random.choice(catmemes.ABUSE_STRINGS)
     await edit_or_reply(abused, reply_text)
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="abusehard$"))
 @bot.on(sudo_cmd(pattern="abusehard$", allow_sudo=True))
 async def fuckedd(abusehard):
-    index = random.randint(0, len(catmemes.ABUSEHARD_STRING) - 1)
-    reply_text = catmemes.ABUSEHARD_STRING[index]
+    reply_text = random.choice(catmemes.ABUSEHARD_STRING)
     await edit_or_reply(abusehard, reply_text)
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="rape$"))
 @bot.on(sudo_cmd(pattern="rape$", allow_sudo=True))
 async def raping(raped):
-    index = random.randint(0, len(catmemes.RAPE_STRINGS) - 1)
-    reply_text = catmemes.RAPE_STRINGS[index]
+    reply_text = random.choice(catmemes.RAPE_STRINGS)
     await edit_or_reply(raped, reply_text)
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="fuck$"))
 @bot.on(sudo_cmd(pattern="fuck$", allow_sudo=True))
 async def chutiya(fuks):
-    index = random.randint(0, len(catmemes.CHU_STRINGS) - 1)
-    reply_text = catmemes.FUK_STRINGS[index]
+    reply_text = random.choice(catmemes.CHU_STRINGS)
     await edit_or_reply(fuks, reply_text)
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="thanos$"))
 @bot.on(sudo_cmd(pattern="thanos$", allow_sudo=True))
 async def thanos(thanos):
-    index = random.randint(0, len(catmemes.THANOS_STRINGS) - 1)
-    reply_text = catmemes.THANOS_STRINGS[index]
+    reply_text = random.choice(catmemes.THANOS_STRINGS)
     await edit_or_reply(thanos, reply_text)
 
 
