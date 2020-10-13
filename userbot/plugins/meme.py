@@ -9,7 +9,7 @@ from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 async def kek(keks):
     keks = await edit_or_reply(keks, ":\\")
     uio = ["/", "\\"]
-    for i in range(1, 15):
+    for i in range(15):
         await asyncio.sleep(0.3)
         txt = ":" + uio[i % 2]
         await keks.edit(txt)
@@ -20,7 +20,7 @@ async def kek(keks):
 async def lol(lel):
     lel = await edit_or_reply(lel, "--")
     okay = "-_-"
-    for _ in range(10):
+    for _ in range(15):
         await asyncio.sleep(0.3)
         okay = okay[:-1] + "_-"
         await lel.edit(okay)
@@ -31,7 +31,7 @@ async def lol(lel):
 async def fun(e):
     e = await edit_or_reply(e, ";;")
     t = ";__;"
-    for _ in range(10):
+    for _ in range(15):
         await asyncio.sleep(0.3)
         t = t[:-1] + "_;"
         await e.edit(t)
