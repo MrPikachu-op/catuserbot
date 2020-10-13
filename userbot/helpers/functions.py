@@ -113,7 +113,7 @@ async def waifutxt(text, chat_id, reply_to_id, bot, borg):
         await borg.send_file(int(chat_id), cat, reply_to=reply_to_id)
         await cat.delete()
 
-        
+
 async def sanga_seperator(list):
     for i in list:
         if i.startswith("🔗"):
@@ -123,10 +123,11 @@ async def sanga_seperator(list):
         if i.startswith("Username History"):
             break
         s += 1
-    usernames=list[s:]
+    usernames = list[s:]
     names = list[:s]
-    return names,usernames
-        
+    return names, usernames
+
+
 # unziping file
 async def unzip(downloaded_file_name):
     with zipfile.ZipFile(downloaded_file_name, "r") as zip_ref:
