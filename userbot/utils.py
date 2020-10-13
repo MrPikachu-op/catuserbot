@@ -272,7 +272,7 @@ def errors_handler(func):
             stdout, stderr = await process.communicate()
             result = str(stdout.decode().strip()) + str(stderr.decode().strip())
             ftext += result
-            file = with open("error.log", "w+")
+            file = open("error.log", "w+")
             file.write(ftext)
             file.close()
             await errors.client.send_file(
