@@ -161,7 +161,7 @@ async def info(event):
             \n**Number of plugins : **`{count}`\
             \n**Usage:** `.help` <plugin name>\n\n"
         catcount = 0
-        for i in sorted(SUDO_LIST)):
+        for i in sorted(SUDO_LIST):
             string += "◆" + f"`{str(i)}`"
             string += "   "
             catcount += 1
