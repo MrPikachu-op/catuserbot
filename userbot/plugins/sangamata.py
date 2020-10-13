@@ -3,7 +3,7 @@ import asyncio
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
 from ..utils import admin_cmd, edit_or_reply, sudo_cmd
-from . import parse_pre, sanga_seperator, CMD_HELp
+from . import parse_pre, sanga_seperator
 
 
 @bot.on(admin_cmd(pattern="(sg|sgu)($| (.*))"))
@@ -89,4 +89,3 @@ CMD_HELP.update(
     "
     }
 )
-                
