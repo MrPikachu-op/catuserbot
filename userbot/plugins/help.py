@@ -43,13 +43,13 @@ async def cmd_list(event):
         return
     if input_str:
         if input_str in CMD_LIST:
-            string = "**{count} Commands found in plugin {}:**\n\n".format(input_str)
+            string = "**{count} Commands found in plugin {input_str}:**\n\n"
             catcount = 0
             for i in CMD_LIST[input_str]:
                 string += f"  •  `{i}`"
                 string += "\n"
                 catcount += 1
-            await event.edit(string.format(count=catcount))
+            await event.edit(string.format(count=catcount,input_str=input_str))
         else:
             await event.edit(input_str + " is not a valid plugin!")
     else:
