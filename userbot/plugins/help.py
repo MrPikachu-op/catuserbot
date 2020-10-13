@@ -28,7 +28,7 @@ async def cmd_list(event):
                 catcount += 1
             string += "\n"
         if len(string) > 4095:
-            data = string.format(count=catcount,plugincount = plugincount)
+            data = string.format(count=catcount, plugincount=plugincount)
             key = (
                 requests.post(
                     "https://nekobin.com/api/documents", json={"content": data}
@@ -41,7 +41,7 @@ async def cmd_list(event):
             reply_text = f"All commands of the catuserbot are [here]({url})"
             await event.edit(reply_text)
             return
-        await event.edit(string.format(count=catcount,plugincount = plugincount))
+        await event.edit(string.format(count=catcount, plugincount=plugincount))
         return
     if input_str:
         if input_str in CMD_LIST:
@@ -130,7 +130,7 @@ async def info(event):
                 catcount += 1
             string += "\n"
         if len(string) > 4095:
-            data = string.format(count=catcount,plugincount = plugincount)
+            data = string.format(count=catcount, plugincount=plugincount)
             key = (
                 requests.post(
                     "https://nekobin.com/api/documents", json={"content": data}
@@ -143,7 +143,7 @@ async def info(event):
             reply_text = f"All commands of the catuserbot are [here]({url})"
             await event.reply(reply_text)
             return
-        await event.reply(string.format(count=catcount,plugincount = plugincount))
+        await event.reply(string.format(count=catcount, plugincount=plugincount))
         return
     if input_str:
         if input_str in SUDO_LIST:
