@@ -29,6 +29,7 @@ else:
     if os.path.exists("config.py"):
         from config import Development as Config
 
+
 def load_module(shortname):
     if shortname.startswith("__"):
         pass
@@ -112,10 +113,10 @@ def admin_cmd(pattern=None, **args):
             except BaseException:
                 pass
         else:
-            if len(Config.COMMAND_HAND_LER)==2:
+            if len(Config.COMMAND_HAND_LER) == 2:
                 catreg = "^" + Config.COMMAND_HAND_LER
                 reg = Config.COMMAND_HAND_LER[1]
-            elif len(Config.COMMAND_HAND_LER)==1:
+            elif len(Config.COMMAND_HAND_LER) == 1:
                 catreg = "^\\" + Config.COMMAND_HAND_LER
                 reg = Config.COMMAND_HAND_LER
             args["pattern"] = re.compile(catreg + pattern)
@@ -152,6 +153,7 @@ def admin_cmd(pattern=None, **args):
 
     return events.NewMessage(**args)
 
+
 def sudo_cmd(pattern=None, **args):
     args["func"] = lambda e: e.via_bot_id is None
     stack = inspect.stack()
@@ -182,10 +184,10 @@ def sudo_cmd(pattern=None, **args):
                 pass
 
         else:
-            if len(Config.SUDO_COMMAND_HAND_LER)==2:
+            if len(Config.SUDO_COMMAND_HAND_LER) == 2:
                 catreg = "^" + Config.SUDO_COMMAND_HAND_LER
                 reg = Config.SUDO_COMMAND_HAND_LER[1]
-            elif len(Config.SUDO_COMMAND_HAND_LER)==1:
+            elif len(Config.SUDO_COMMAND_HAND_LER) == 1:
                 catreg = "^\\" + Config.SUDO_COMMAND_HAND_LER
                 reg = Config.COMMAND_HAND_LER
             args["pattern"] = re.compile(catreg + pattern)
@@ -216,6 +218,7 @@ def sudo_cmd(pattern=None, **args):
     # check if the plugin should listen for outgoing 'messages'
     return events.NewMessage(**args)
 
+
 # from paperplaneextended
 on = bot.on
 
@@ -230,6 +233,7 @@ def on(**args):
         return wrapper
 
     return decorater
+
 
 def errors_handler(func):
     async def wrapper(errors):
@@ -369,9 +373,6 @@ class Loader:
         bot.add_event_handler(func, events.NewMessage(**args))
 
 
-
-
-
 # Admin checker by uniborg
 async def is_admin(client, chat_id, user_id):
     if not str(chat_id).startswith("-100"):
@@ -397,6 +398,7 @@ async def edit_or_reply(event, text):
             return await reply_to.reply(text)
         return await event.reply(text)
     return await event.edit(text)
+
 
 def register(**args):
     args["func"] = lambda e: e.via_bot_id is None
@@ -457,6 +459,7 @@ def register(**args):
         return func
 
     return decorator
+
 
 def command(**args):
     args["func"] = lambda e: e.via_bot_id is None
