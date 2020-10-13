@@ -1,6 +1,5 @@
 import random
 
-
 RENDISTR = [
     "`I Know Uh ez Rendi Bhay Dont show Your Randi Pesa Here`",
     "`Jag Suna suna laage Sab #maderchod bhay`",
@@ -366,13 +365,7 @@ HIT = [
     "bashes",
 ]
 
-WHERE = [
-    "in the chest", 
-    "on the head", 
-    "on the butt",
-    "on the crotch"
-]
-
+WHERE = ["in the chest", "on the head", "on the butt", "on the crotch"]
 
 
 async def slap(replied_user, event):
@@ -397,6 +390,7 @@ async def slap(replied_user, event):
         throws=throw,
         where=where,
     )
+
 
 UWUS = [
     "(・`ω´・)",
