@@ -5,4 +5,4 @@ from .memeifyhelpers import *
 from .progress import *
 from .qhelper import process
 from .utils import *
-from .memeshelper import *
+from . import memeshelper as memes
