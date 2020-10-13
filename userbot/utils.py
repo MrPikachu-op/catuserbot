@@ -98,7 +98,13 @@ def admin_cmd(pattern=None, **args):
             args["pattern"] = re.compile(pattern)
         elif pattern.startswith(r"^"):
             args["pattern"] = re.compile(pattern)
-            cmd = (pattern).replace("$", "").replace("^", "").replace("\\", "").replace("^", "")
+            cmd = (
+                (pattern)
+                .replace("$", "")
+                .replace("^", "")
+                .replace("\\", "")
+                .replace("^", "")
+            )
             try:
                 CMD_LIST[file_test].append(cmd)
             except BaseException:
