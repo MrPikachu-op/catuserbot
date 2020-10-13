@@ -235,13 +235,6 @@ async def _(e):
     await edit_or_reply(e, txt)
 
 
-@bot.on(admin_cmd(outgoing=True, pattern="rendi$"))
-@bot.on(sudo_cmd(pattern="rendi$", allow_sudo=True))
-async def metoo(e):
-    txt = random.choice(catmemes.RENDISTR)
-    await edit_or_reply(e, txt)
-
-
 @bot.on(admin_cmd(outgoing=True, pattern="shg$"))
 @bot.on(sudo_cmd(pattern="shg$", allow_sudo=True))
 async def shrugger(e):
@@ -372,46 +365,48 @@ CMD_HELP.update(
         "memes": "**Plugin : **`memes`\
         \n\n**Syntax :** `.cowsay`\
         \n**Usage : **cow which says things.\
-        \n\n**Syntax :** `.milksay`\
-        \n**Usage : **Weird Milk that can speak\
-        \n\n**Syntax :** `:/`\
-        \n**Usage : **Check yourself ;)\
-        \n\n**Syntax :** `-_-`\
-        \n**Usage : **Ok...\
-        \n\n**Syntax :** `;_;`\
-        \n**Usage : **Like `-_-` but crying.\
-        \n\n**Syntax :** `.10iq`\
-        \n**Usage : **You retard !!\
-        \n\n**Syntax :** `.oof`\
-        \n**Usage : **Ooooof\
-        \n\n**Syntax :** `.coinflip <heads/tails>`\
-        \n**Usage : **Flip a coin !!\
-        \n\n**Syntax :** `.owo`\
-        \n**Usage : **UwU\
-        \n\n**Syntax :** `.react` <type>\
-        \n**Usage : **Make your userbot react. types are <happy ,think ,wave ,wtf ,love ,confused,dead, sad,dog>\
+        \n\n**Syntax :** `.coin <heads/tails>`\
+        \n**Usage : **Flips a coin !!\
         \n\n**Syntax :** `.slap`\
         \n**Usage : **reply to slap them with random objects !!\
+        \n\n**Syntax :** `.yes` ,`.no` , `.maybe` , `.decide`\
+        \n**Usage : **Sends you the respectively gif of command u used\
+        \n\n**Syntax :** `.owo`\
+        \n**Usage : **UwU\
+        \n\n**Syntax :** `.clap`\
+        \n**Usage : **Praise people!\
+        \n\n**Syntax :** `.smk <text/reply>`\
+        \n**Usage : **A shit module for ツ , who cares.\
+        \n\n**Syntax :** `.ftext <emoji/character>`\
+        \n**Usage : **Pay Respects.\
+        \n\n**Syntax :** `.repo`\
+        \n**Usage : **Shows to source code link of catuserbot.\
+        \n\n**Syntax :** `.congo`\
+        \n**Usage : **Congratulate the people.\
         \n\n**Syntax :** `.shg`\
         \n**Usage : **Shrug at it !!\
         \n\n**Syntax :** `.runs`\
         \n**Usage : **Run, run, RUNNN!\
-        \n\n**Syntax :** `.clap`\
-        \n**Usage : **Praise people!\
-        \n\n**Syntax :** `.ftext <emoji/character>`\
-        \n**Usage : **Pay Respects.\
-        \n\n**Syntax :** `.bt`\
-        \n**Usage : **Believe me, you will find this useful.\
-        \n\n**Syntax :** `.smk <text/reply>`\
-        \n**Usage : **A shit module for ツ , who cares.\
-        \n\n**Syntax :** `.type`\
-        \n**Usage : **Just a small command to make your keyboard become a typewriter!\
-        \n\n**Syntax :** `.lfy <query>`\
-        \n**Usage : **Let me Google that for you real quick !!\
         \n\n**Syntax :** `.noob`\
         \n**Usage : **Whadya want to know? Are you a NOOB?\
+        \n\n**Syntax :** `.insult`\
+        \n**Usage : **insult someone\
+        \n\n**Syntax :** `.hey`\
+        \n**Usage : **start a conversation with people\
         \n\n**Syntax :** `.pro`\
         \n**Usage : **If you think you're pro, try this.\
+        \n\n**Syntax :** `.react` <type>\
+        \n**Usage : **Make your userbot react. types are <happy ,think ,wave ,wtf ,love ,confused,dead, sad,dog>\
+        \n\n**Syntax :** `.10iq`\
+        \n**Usage : **You retard !!\
+        \n\n**Syntax :** `.fp`\
+        \n**Usage : **send you face pam emoji!\
+        \n\n**Syntax :** `.bt`\
+        \n**Usage : **Believe me, you will find this useful.\
+        \n\n**Syntax :** `.session`\
+        \n**Usage : **telethon session error code(fun)\
+        \n\n**Syntax :** `.lfy <query>`\
+        \n**Usage : **Let me Google that for you real quick !!\
 "
     }
 )
