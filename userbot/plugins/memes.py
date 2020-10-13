@@ -139,7 +139,25 @@ async def decide(event):
         )
     )
 
-
+                        
+@bot.on(admin_cmd(pattern=f"shout", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"shout", allow_sudo=True))                       
+async def shout(args):
+    msg = "```"
+    messagestr = args.text
+    messagestr = messagestr[7:]
+    text = " ".join(messagestr)
+    result = []
+    result.append(" ".join([s for s in text]))
+    for pos, symbol in enumerate(text[1:]):
+        result.append(symbol + " " + "  " * pos + symbol)
+    result = list("\n".join(result))
+    result[0] = text[0]
+    result = "".join(result)
+    msg = "\n" + result
+    await edit_or_reply(args,"`" + msg + "`")
+                        
+                        
 @bot.on(admin_cmd(outgoing=True, pattern="owo ?(.*)"))
 @bot.on(sudo_cmd(pattern="owo ?(.*)", allow_sudo=True))
 async def faces(owo):
@@ -160,8 +178,8 @@ async def faces(owo):
     reply_text = reply_text.replace("ove", "uv")
     reply_text += " " + random.choice(catmemes.UWUS)
     await edit_or_reply(owo, reply_text)
-
-
+                        
+                        
 @bot.on(admin_cmd(outgoing=True, pattern="clap(?: |$)(.*)"))
 @bot.on(sudo_cmd(pattern="clap(?: |$)(.*)", allow_sudo=True))
 async def claptext(event):
@@ -371,6 +389,8 @@ CMD_HELP.update(
         \n**Usage : **reply to slap them with random objects !!\
         \n\n**Syntax :** `.yes` ,`.no` , `.maybe` , `.decide`\
         \n**Usage : **Sends you the respectively gif of command u used\
+        \n\n**Syntax :** `.shout text`\
+        \n**Usage : **shouts the text in a fun way\
         \n\n**Syntax :** `.owo`\
         \n**Usage : **UwU\
         \n\n**Syntax :** `.clap`\
