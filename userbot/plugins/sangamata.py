@@ -1,16 +1,22 @@
 import asyncio
+
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from ..utils import admin_cmd, sudo_cmd , edit_or_reply
+
+from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 from . import parse_pre, sanga_seperator
 
+
 @bot.on(admin_cmd(pattern="(sg|sgu)($| (.*))"))
-@bot.on(sudo_cmd(pattern="(sg|sgu)($| (.*))",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="(sg|sgu)($| (.*))", allow_sudo=True))
 async def _(event):
     # https://t.me/catuserbot_support/181159
     input_str = "".join(event.text.split(maxsplit=1)[1:])
     reply_message = await event.get_reply_message()
     if not input_str and not reply_message:
-        catevent = await edit_or_reply(event ,"`reply to  user's text message to get name/username history or give userid`")
+        catevent = await edit_or_reply(
+            event,
+            "`reply to  user's text message to get name/username history or give userid`",
+        )
         await asyncio.sleep(5)
         return await catevent.delete()
     if input_str:
@@ -20,14 +26,16 @@ async def _(event):
             try:
                 u = await event.client.get_entity(input_str)
             except ValueError:
-                catevent = await edit_or_reply(event ,"`Give userid or username to find name history`")
+                catevent = await edit_or_reply(
+                    event, "`Give userid or username to find name history`"
+                )
                 await asyncio.sleep(5)
                 return await catevent.delete()
             id = u.id
     else:
         id = reply_message.from_id
     chat = "@SangMataInfo_bot"
-    catevent = await edit_or_reply(event ,"`Processing...`")
+    catevent = await edit_or_reply(event, "`Processing...`")
     async with event.client.conversation(chat) as conv:
         try:
             await conv.send_message(f"/search_id {id}")
@@ -51,21 +59,21 @@ async def _(event):
         await catevent.edit("`The user doesn't have any record`")
         await asyncio.sleep(5)
         return await catevent.delete()
-    names , usernames = await sanga_seperator(responses)
+    names, usernames = await sanga_seperator(responses)
     cmd = event.pattern_match.group(1)
     if cmd == "sg":
         sandy = None
         for i in names:
             if sandy:
-                await event.reply(i , parse_mode = parse_pre)
+                await event.reply(i, parse_mode=parse_pre)
             else:
                 sandy = True
-                await catevent.edit(i,parse_mode = parse_pre)
+                await catevent.edit(i, parse_mode=parse_pre)
     elif cmd == "sgu":
         sandy = None
         for i in usernames:
             if sandy:
-                await event.reply(i,parse_mode = parse_pre)
+                await event.reply(i, parse_mode=parse_pre)
             else:
                 sandy = True
-                await catevent.edit(i,parse_mode = parse_pre)
+                await catevent.edit(i, parse_mode=parse_pre)
