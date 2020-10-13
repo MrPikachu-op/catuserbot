@@ -18,8 +18,8 @@ async def kek(keks):
 @bot.on(admin_cmd(outgoing=True, pattern="^\-_-$"))
 @bot.on(sudo_cmd(pattern="^\-_-$", allow_sudo=True))
 async def lol(lel):
-    lel = await edit_or_reply(lel, "--")
-    okay = "-_-"
+    lel = await edit_or_reply(lel, "-__-")
+    okay = "-__-"
     for _ in range(15):
         await asyncio.sleep(0.3)
         okay = okay[:-1] + "_-"
@@ -29,7 +29,7 @@ async def lol(lel):
 @bot.on(admin_cmd(outgoing=True, pattern="^\;_;$"))
 @bot.on(sudo_cmd(pattern="^\;_;$", allow_sudo=True))
 async def fun(e):
-    e = await edit_or_reply(e, ";;")
+    e = await edit_or_reply(e, ";__;")
     t = ";__;"
     for _ in range(15):
         await asyncio.sleep(0.3)
