@@ -71,7 +71,7 @@ async def meme(event):
     sleepValue = 0.5
     memeVar = memeVar[6:]
     if not memeVar:
-        pass
+         memeVar = "✈️"
     event = await edit_or_reply(event, "-------------" + memeVar)
     await asyncio.sleep(sleepValue)
     await event.edit("------------" + memeVar + "-")
