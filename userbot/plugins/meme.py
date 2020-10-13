@@ -1,5 +1,5 @@
 import asyncio
-
+from .. import CMD_HELP
 from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
@@ -176,7 +176,7 @@ async def give(event):
     await event.edit(lp + lp + lp + lp + lp + lp + lp + lp + lp)
 
 
-cmd_help.update(
+CMD_HELP.update(
     {
         "meme": "**Plugin : **`meme`\
         \n\n**Commands :**\
