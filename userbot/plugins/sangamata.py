@@ -3,7 +3,7 @@ import asyncio
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
 from ..utils import admin_cmd, edit_or_reply, sudo_cmd
-from . import parse_pre, sanga_seperator
+from . import parse_pre, sanga_seperator, CMD_HELp
 
 
 @bot.on(admin_cmd(pattern="(sg|sgu)($| (.*))"))
@@ -77,3 +77,16 @@ async def _(event):
             else:
                 sandy = True
                 await catevent.edit(i, parse_mode=parse_pre)
+
+
+CMD_HELP.update(
+    {
+        "sangamata": "**Plugin : **`sangamata`\
+    \n\n**Syntax : **`.sg <username/userid/reply>`\
+    \n**Usage : **Shows you the previous name history of user.\
+    \n\n**Syntax : **`.sgu <username/userid/reply>`\
+    \n**Usage : **Shows you the previous username history of user.\
+    "
+    }
+)
+                
