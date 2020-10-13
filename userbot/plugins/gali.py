@@ -19,6 +19,13 @@ async def fuckedd(abusehard):
     await edit_or_reply(abusehard, reply_text)
 
 
+@bot.on(admin_cmd(outgoing=True, pattern="rendi$"))
+@bot.on(sudo_cmd(pattern="rendi$", allow_sudo=True))
+async def metoo(e):
+    txt = random.choice(catmemes.RENDISTR)
+    await edit_or_reply(e, txt)
+    
+    
 @bot.on(admin_cmd(outgoing=True, pattern="rape$"))
 @bot.on(sudo_cmd(pattern="rape$", allow_sudo=True))
 async def raping(raped):
@@ -82,6 +89,7 @@ CMD_HELP.update(
         \n\n**Commands :**\
         \n  •  `.abuse`\
         \n  •  `.abusehard`\
+        \n  •  `.rendi`\
         \n  •  `.rape`\
         \n  •  `.fuck`\
         \n  •  `.thanos`\
