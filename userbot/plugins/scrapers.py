@@ -3,24 +3,22 @@
 # Copyright (c) JeepBot | 2019(for imdb)
 # # kanged from Blank-x ;---;
 
+import os
 import re
+
 import bs4
 import requests
-import os
-import random
-from asyncio import sleep
-from urllib.parse import quote_plus
-from emoji import get_emoji_regexp
 from googletrans import LANGUAGES, Translator
-from gtts.lang import tts_langs
 from wikipedia import summary
 from wikipedia.exceptions import DisambiguationError, PageError
-from ..utils import admin_cmd,edit_or_reply,sudo_cmd
-from . import BOTLOG_CHATID , BOTLOG, deEmojify
+
+from ..utils import admin_cmd, edit_or_reply, sudo_cmd
+from . import BOTLOG, BOTLOG_CHATID, deEmojify
 
 TTS_LANG = "en"
 TRT_LANG = "en"
 langi = "en"
+
 
 @bot.on(admin_cmd(outgoing=True, pattern=r"wiki (.*)"))
 @bot.on(sudo_cmd(allow_sudo=True, pattern=r"wiki (.*)"))
@@ -30,15 +28,15 @@ async def wiki(wiki_q):
     try:
         summary(match)
     except DisambiguationError as error:
-        await edit_or_reply( wiki_q , f"Disambiguated page found.\n\n{error}")
+        await edit_or_reply(wiki_q, f"Disambiguated page found.\n\n{error}")
         return
     except PageError as pageerror:
-        await edit_or_reply( wiki_q ,f"Page not found.\n\n{pageerror}")
+        await edit_or_reply(wiki_q, f"Page not found.\n\n{pageerror}")
         return
     result = summary(match)
     if len(result) >= 4096:
         with open("output.txt", "w+") as file:
-             file.write(result)
+            file.write(result)
         await wiki_q.client.send_file(
             wiki_q.chat_id,
             "output.txt",
@@ -49,18 +47,19 @@ async def wiki(wiki_q):
         if os.path.exists("output.txt"):
             os.remove("output.txt")
         return
-    await edit_or_reply( wiki_q ,"**Search:**\n`" + match + "`\n\n**Result:**\n" + result)
+    await edit_or_reply(
+        wiki_q, "**Search:**\n`" + match + "`\n\n**Result:**\n" + result
+    )
     if BOTLOG:
         await wiki_q.client.send_message(
             BOTLOG_CHATID, f"Wiki query `{match}` was executed successfully"
         )
 
 
-
 @bot.on(admin_cmd(pattern="imdb (.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="imdb (.*)", oallow_sudo=True))
 async def imdb(e):
-    catevent = await edit_or_reply(e , "`searching........")
+    catevent = await edit_or_reply(e, "`searching........")
     try:
         movie_name = e.pattern_match.group(1)
         remove_space = movie_name.split(" ")
@@ -162,18 +161,18 @@ async def translateme(trans):
     elif textx:
         message = textx.text
     else:
-        await edit_or_reply(trans,"`Give a text or reply to a message to translate!`")
+        await edit_or_reply(trans, "`Give a text or reply to a message to translate!`")
         return
     try:
         reply_text = translator.translate(deEmojify(message), dest=TRT_LANG)
     except ValueError:
-        await edit_or_reply(trans,"Invalid destination language.")
+        await edit_or_reply(trans, "Invalid destination language.")
         return
     source_lan = LANGUAGES[f"{reply_text.src.lower()}"]
     transl_lan = LANGUAGES[f"{reply_text.dest.lower()}"]
     reply_text = f"**From** __{source_lan.title()}__\n**To **__{transl_lan.title()}__**:**\n\n`{reply_text.text}``"
 
-    await edit_or_reply(trans,reply_text)
+    await edit_or_reply(trans, reply_text)
     if BOTLOG:
         await trans.client.send_message(
             BOTLOG_CHATID,
@@ -192,11 +191,12 @@ async def lang(value):
         TRT_LANG = arg
         LANG = LANGUAGES[arg]
     else:
-        await edit_or_reply( value ,
-            f"`Invalid Language code !!`\n`Available language codes for TRT`:\n\n`{LANGUAGES}`"
+        await edit_or_reply(
+            value,
+            f"`Invalid Language code !!`\n`Available language codes for TRT`:\n\n`{LANGUAGES}`",
         )
         return
-    await edit_or_reply(value , f"`Language for {scraper} changed to {LANG.title()}.`")
+    await edit_or_reply(value, f"`Language for {scraper} changed to {LANG.title()}.`")
     if BOTLOG:
         await value.client.send_message(
             BOTLOG_CHATID, f"`Language for {scraper} changed to {LANG.title()}.`"
