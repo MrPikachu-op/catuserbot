@@ -115,7 +115,7 @@ async def upload(path, event, udir_event):
                 force_document=False,
                 thumb=thumb,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                    progress(d, t, udir_event, c_time, "Uploading...", path)
+                    progress(d, t, udir_event, c_time, "Uploading...", caption_rts)
                 ),
             )
         else:
@@ -146,7 +146,7 @@ async def upload(path, event, udir_event):
                     )
                 ],
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                    progress(d, t, udir_event, c_time, "Uploading...", path)
+                    progress(d, t, udir_event, c_time, "Uploading...", caption_rts)
                 ),
             )
         uploaded += 1
