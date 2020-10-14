@@ -2,15 +2,14 @@
 
 import logging
 import os
-from datetime import datetime
 
 import requests
 from requests import exceptions, get
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
-from . import CMD_HELP, BOTLOG, BOTLOG_CHATID
-from ..utils import admin_cmd, sudo_cmd , edit_or_reply
+from ..utils import admin_cmd, edit_or_reply, sudo_cmd
+from . import CMD_HELP
 
 logging.basicConfig(
     format="[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s", level=logging.WARNING
@@ -24,13 +23,14 @@ def progress(current, total):
         )
     )
 
+
 DOGBIN_URL = "https://del.dog/"
 
 
-@bot.on(admin_cmd(pattern="paste( (.*)|$)",outgoing=True))
-@bot.on(sudo_cmd(pattern="paste( (.*)|$)",allow_sudo=True))
+@bot.on(admin_cmd(pattern="paste( (.*)|$)", outgoing=True))
+@bot.on(sudo_cmd(pattern="paste( (.*)|$)", allow_sudo=True))
 async def _(event):
-    catevent = await edit_or_reply(event,"`pasting to del dog.....`")
+    catevent = await edit_or_reply(event, "`pasting to del dog.....`")
     input_str = "".join(event.text.split(maxsplit=1)[1:])
     if input_str:
         message = input_str
@@ -49,7 +49,9 @@ async def _(event):
                 for m in m_list:
                     message += m.decode("UTF-8") + "\r\n"
             except:
-                message = "**Usage : **`.paste <long text to include/reply to text file>`"
+                message = (
+                    "**Usage : **`.paste <long text to include/reply to text file>`"
+                )
             os.remove(downloaded_file_name)
         else:
             message = previous_message.message
@@ -60,17 +62,17 @@ async def _(event):
         nurl = f"https://del.dog/v/{r['key']}"
         await catevent.edit(
             "**Pasted to dogbin : **[dog]({}).\n**GoTo Original URL: **[link]({})".format(
-                 nurl , url
+                nurl, url
             )
         )
     else:
         await catevent.edit("**Pasted to dogbin : **[dog]({})".format(url))
 
 
-@bot.on(admin_cmd(pattern="neko( (.*)|$)",outgoing=True))
-@bot.on(sudo_cmd(pattern="neko( (.*)|$)",allow_sudo=True))
+@bot.on(admin_cmd(pattern="neko( (.*)|$)", outgoing=True))
+@bot.on(sudo_cmd(pattern="neko( (.*)|$)", allow_sudo=True))
 async def _(event):
-    catevent = await edit_or_reply(event,"`pasting to neko bin.....`")
+    catevent = await edit_or_reply(event, "`pasting to neko bin.....`")
     input_str = "".join(event.text.split(maxsplit=1)[1:])
     if input_str:
         message = input_str
@@ -89,7 +91,9 @@ async def _(event):
                 for m in m_list:
                     message += m.decode("UTF-8") + "\r\n"
             except:
-                message = "**Usage : **`.paste <long text to include/reply to text file>`"
+                message = (
+                    "**Usage : **`.paste <long text to include/reply to text file>`"
+                )
             os.remove(downloaded_file_name)
         else:
             message = previous_message.message
@@ -116,10 +120,10 @@ async def _(event):
     await catevent.edit(reply_text)
 
 
-@bot.on(admin_cmd(pattern="iffuci( (.*)|$)",outgoing=True))
-@bot.on(sudo_cmd(pattern="iffuci( (.*)|$)",allow_sudo=True))
+@bot.on(admin_cmd(pattern="iffuci( (.*)|$)", outgoing=True))
+@bot.on(sudo_cmd(pattern="iffuci( (.*)|$)", allow_sudo=True))
 async def _(event):
-    catevent = await edit_or_reply(event,"`pasting to del dog.....`")
+    catevent = await edit_or_reply(event, "`pasting to del dog.....`")
     input_str = "".join(event.text.split(maxsplit=1)[1:])
     if input_str:
         message = input_str
@@ -138,7 +142,9 @@ async def _(event):
                 for m in m_list:
                     message += m.decode("UTF-8") + "\r\n"
             except:
-                message = "**Usage : **`.paste <long text to include/reply to text file>`"
+                message = (
+                    "**Usage : **`.paste <long text to include/reply to text file>`"
+                )
             os.remove(downloaded_file_name)
         else:
             message = previous_message.message
@@ -148,19 +154,18 @@ async def _(event):
     if r["isUrl"]:
         nurl = f"https://iffuci.tk/v/{r['key']}"
         await catevent.edit(
-            "code is pasted to {}. GoTo Original URL: {}".format(
-                nurl, url
-            )
+            "code is pasted to {}. GoTo Original URL: {}".format(nurl, url)
         )
     else:
         await catevent.edit("code is pasted to {}".format(url))
+
 
 @bot.on(admin_cmd(outgoing=True, pattern="getpaste( (.*)|$)"))
 @bot.on(sudo_cmd(allow_sudo=True, pattern="getpaste( (.*)|$)"))
 async def get_dogbin_content(dog_url):
     textx = await dog_url.get_reply_message()
     message = dog_url.pattern_match.group(1)
-    catevent = await edit_or_reply(dog_url , "`Getting dogbin content...`")
+    catevent = await edit_or_reply(dog_url, "`Getting dogbin content...`")
     if not message and textx:
         message = str(textx.message)
     format_normal = f"{DOGBIN_URL}"
@@ -196,12 +201,12 @@ async def get_dogbin_content(dog_url):
     await catevent.edit(reply_text)
 
 
-@bot.on(admin_cmd(pattern="paster( (.*)|$)",outgoing=True))
-@bot.on(sudo_cmd(pattern="paster( (.*)|$)",allow_sudo=True))
+@bot.on(admin_cmd(pattern="paster( (.*)|$)", outgoing=True))
+@bot.on(sudo_cmd(pattern="paster( (.*)|$)", allow_sudo=True))
 async def _(event):
-    catevent = await edit_or_reply(event,"`pasting to del dog.....`")
+    catevent = await edit_or_reply(event, "`pasting to del dog.....`")
     input_str = "".join(event.text.split(maxsplit=1)[1:])
-    previous_message =None
+    previous_message = None
     if input_str:
         message = input_str
     elif event.reply_to_msg_id:
@@ -219,7 +224,9 @@ async def _(event):
                 for m in m_list:
                     message += m.decode("UTF-8") + "\r\n"
             except:
-                message = "**Usage : **`.paste <long text to include/reply to text file>`"
+                message = (
+                    "**Usage : **`.paste <long text to include/reply to text file>`"
+                )
             os.remove(downloaded_file_name)
         else:
             message = previous_message.message
@@ -233,7 +240,7 @@ async def _(event):
         try:
             response = conv.wait_event(
                 events.NewMessage(incoming=True, from_users=272572121)
-                )
+            )
             await event.client.send_message(chat, url)
             response = await response
         except YouBlockedUserError:
@@ -242,7 +249,7 @@ async def _(event):
         await catevent.delete()
         await event.client.send_message(
             event.chat_id, response.message, reply_to=previous_message
-            )
+        )
 
 
 CMD_HELP.update(
