@@ -130,7 +130,7 @@ CMD_HELP.update(
         \n**Function : ** __Get information about an user on GitHub of given username__\
         \n\n**Syntax : **`.commit reply to python file to upload to github`\
         \n**Function : **__It uploads the given file to your github repo(to userbot/plugins folder)\
-        \nTo work commit plugin set `GITHUB_ACCESS_TOKEN` and `GIT_REPO_NAME` Variables in Heroku vars First__
+        \nTo work commit plugin set `GITHUB_ACCESS_TOKEN` and `GIT_REPO_NAME` Variables in Heroku vars First__\
     "
     }
 )
