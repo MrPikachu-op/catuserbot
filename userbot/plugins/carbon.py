@@ -570,15 +570,15 @@ CMD_HELP.update(
     {
         "carbon": "**Plugin : **`carbon`\
     \n\n**Commands are :** \
-    \n  •  `.carbon` <reply to code>\
-    \n  •  `.krb` <reply to code>\
-    \n  •  `.kar1` <reply to code>\
-    \n  •  `.kar2` <reply to code>\
-    \n  •  `.kar3` <reply to code>\
-    \n  •  `.kar4` <reply to code>\
-    \n  •  `.rgbk2` <reply to code>\
-    \n  •  `.kargb` <reply to code>\
-    \n\n**Function : \
+    \n  •  `.carbon <reply to code>`\
+    \n  •  `.krb <reply to code>`\
+    \n  •  `.kar1 <reply to code>`\
+    \n  •  `.kar2 <reply to code>`\
+    \n  •  `.kar3 <reply to code>`\
+    \n  •  `.kar4 <reply to code>`\
+    \n  •  `.rgbk2 <reply to code>`\
+    \n  •  `.kargb <reply to code>`\
+    \n\n**Function : **\
     \n__Carbon generators each command has one style of carbon (krb ,kargb shows random carbons remaining all are fixed)__\
     "
     }
