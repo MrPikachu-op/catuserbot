@@ -326,15 +326,15 @@ async def get_user_from_event(event):
 CMD_HELP.update(
     {
         "gadmin": "**Plugin : **`gadmin`\
-        \n\n**Syntax : **`.gban <username/reply/userid> <reason (optional)>\
+        \n\n**Syntax : **`.gban <username/reply/userid> <reason (optional)>`\
 \n**Function : **Bans the person in all groups where you are admin .\
-\n\n**Syntax : **`.ungban <username/reply/userid>\
+\n\n**Syntax : **`.ungban <username/reply/userid>`\
 \n**Function : **Reply someone's message with .ungban to remove them from the gbanned list.\
-\n\n**Syntax : **`.listgban\
+\n\n**Syntax : **`.listgban`\
 \n**Function : **Shows you the gbanned list and reason for their gban.\
-\n\n**Syntax : **`.gmute <username/reply> <reason (optional)>\
+\n\n**Syntax : **`.gmute <username/reply> <reason (optional)>`\
 \n**Function : **Mutes the person in all groups you have in common with them.\
-\n\n**Syntax : **`.ungmute <username/reply>\
+\n\n**Syntax : **`.ungmute <username/reply>`\
 \n**Function : **Reply someone's message with .ungmute to remove them from the gmuted list."
     }
 )
