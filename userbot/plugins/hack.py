@@ -4,14 +4,14 @@ import asyncio
 
 from telethon.tl.functions.users import GetFullUserRequest
 
-from . import ALIVE_NAME, CMD_HELP
 from ..utils import admin_cmd, edit_or_reply, sudo_cmd
+from . import ALIVE_NAME, CMD_HELP
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "cat"
 
 
 @bot.on(admin_cmd(pattern=r"hack$", outgoing=True))
-@bot.on(sudo_cmd(pattern=r"hack$",allow_sudo=True))
+@bot.on(sudo_cmd(pattern=r"hack$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -22,9 +22,11 @@ async def _(event):
         replied_user.user.username
         idd = reply_message.from_id
         if idd == 1035034432:
-            await edit_or_reply(event , "This is My Master\nI can't hack my master's Account")
+            await edit_or_reply(
+                event, "This is My Master\nI can't hack my master's Account"
+            )
         else:
-            event = await edit_or_reply(event , "Hacking..")
+            event = await edit_or_reply(event, "Hacking..")
             animation_chars = [
                 "`Connecting To Hacked Private Server...`",
                 "`Target Selected.`",
@@ -44,17 +46,17 @@ async def _(event):
                 await asyncio.sleep(animation_interval)
                 await event.edit(animation_chars[i % 11])
     else:
-        await edit_or_reply(event , "No User is Defined\n Can't hack account")
+        await edit_or_reply(event, "No User is Defined\n Can't hack account")
 
 
 @bot.on(admin_cmd(pattern=f"thack$", outgoing=True))
-@bot.on(sudo_cmd(pattern=r"thack$",allow_sudo=True))
+@bot.on(sudo_cmd(pattern=r"thack$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     animation_interval = 2
     animation_ttl = range(12)
-    event = await edit_or_reply(event , "thack")
+    event = await edit_or_reply(event, "thack")
     animation_chars = [
         "**Connecting To Telegram Data Centre**",
         f"Target Selected By Hacker: {DEFAULTUSER}",
@@ -74,13 +76,13 @@ async def _(event):
 
 
 @bot.on(admin_cmd(pattern=f"wahack$", outgoing=True))
-@bot.on(sudo_cmd(pattern=r"wahack$",allow_sudo=True))
+@bot.on(sudo_cmd(pattern=r"wahack$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     animation_interval = 2
     animation_ttl = range(15)
-    event = await edit_or_reply(event , "wahack..")
+    event = await edit_or_reply(event, "wahack..")
     animation_chars = [
         "Looking for WhatsApp databases in targeted person...",
         " User online: True\nTelegram access: True\nRead Storage: True ",
