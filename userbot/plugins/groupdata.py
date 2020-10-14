@@ -14,12 +14,12 @@ from telethon.errors import (
 )
 from telethon.tl import functions
 from telethon.tl.functions.channels import GetFullChannelRequest, GetParticipantsRequest
-from telethon.tl.types import ChannelParticipantAdmin, ChannelParticipantsBots
 from telethon.tl.functions.messages import GetFullChatRequest, GetHistoryRequest
 from telethon.tl.types import (
     ChannelParticipantAdmin,
     ChannelParticipantCreator,
     ChannelParticipantsAdmins,
+    ChannelParticipantsBots,
     ChannelParticipantsKicked,
     ChatBannedRights,
     MessageActionChannelMigrateFrom,
@@ -95,8 +95,8 @@ async def _(event):
     await event.delete()
 
 
-@bot.on(admin_cmd(pattern="get_bots ?(.*)",outgoing=True))
-@bot.on(admin_cmd(pattern="get_bots ?(.*)",allow_sudo=True))
+@bot.on(admin_cmd(pattern="get_bots ?(.*)", outgoing=True))
+@bot.on(admin_cmd(pattern="get_bots ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -111,10 +111,12 @@ async def _(event):
         try:
             chat = await event.client.get_entity(input_str)
         except Exception as e:
-            await edit_or_reply( event ,str(e))
+            await edit_or_reply(event, str(e))
             return None
     try:
-        async for x in event.client.iter_participants(chat, filter=ChannelParticipantsBots):
+        async for x in event.client.iter_participants(
+            chat, filter=ChannelParticipantsBots
+        ):
             if isinstance(x.participant, ChannelParticipantAdmin):
                 mentions += "\n ⚜️ [{}](tg://user?id={}) `{}`".format(
                     x.first_name, x.id, x.id
@@ -125,7 +127,7 @@ async def _(event):
                 )
     except Exception as e:
         mentions += " " + str(e) + "\n"
-    await edit_or_reply( event ,mentions)
+    await edit_or_reply(event, mentions)
 
 
 @bot.on(admin_cmd(pattern=r"users ?(.*)", outgoing=True))
@@ -234,7 +236,7 @@ async def _(event):
         await et.edit("{}: {} unbanned".format(event.chat_id, p))
 
 
-@bot.on(admin_cmd(pattern="ikuck ?(.*)",outgoing=True))
+@bot.on(admin_cmd(pattern="ikuck ?(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="ikuck (.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
