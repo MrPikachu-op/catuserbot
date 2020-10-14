@@ -106,4 +106,7 @@ async def progress(
             f"**ETA :**` {time_formatter(eta)}`\n"
             f"**Duration :** `{time_formatter(elapsed_time)}`"
         )
-        await gdrive.edit(f"**{prog_type}**\n\n" f"**Status**\n{tmp}")
+        if file_name:
+            await gdrive.edit(f"**{prog_type}**\n\n" f"**File Name : **`{file_name}`**Status**\n{tmp}")
+        else:
+            await gdrive.edit(f"**{prog_type}**\n\n" f"**Status**\n{tmp}")
