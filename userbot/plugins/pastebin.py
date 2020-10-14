@@ -161,9 +161,8 @@ async def get_dogbin_content(dog_url):
     textx = await dog_url.get_reply_message()
     message = dog_url.pattern_match.group(1)
     catevent = await edit_or_reply(dog_url , "`Getting dogbin content...`")
-    if not message:
-        if textx:
-            message = str(textx.message)
+    if not message and textx:
+        message = str(textx.message)
     format_normal = f"{DOGBIN_URL}"
     format_view = f"{DOGBIN_URL}v/"
 
@@ -229,9 +228,9 @@ async def _(event):
     url = f"https://del.dog/{r['key']}"
     chat = "@chotamreaderbot"
     # This module is modded by @ViperAdnan #KeepCredit
-   await catevent.edit("**Making instant view...**")
-   async with event.client.conversation(chat) as conv:
-       try:
+    await catevent.edit("**Making instant view...**")
+    async with event.client.conversation(chat) as conv:
+        try:
             response = conv.wait_event(
                 events.NewMessage(incoming=True, from_users=272572121)
                 )
