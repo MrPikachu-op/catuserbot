@@ -36,7 +36,7 @@ async def _(event):
 **Type :** {}
 **Company :** {}
 **Blog :** {}
-**Locationv {}
+**Location :** {}
 **Bio :** {}
 **Profile Created :** {}""".format(
                 name, html_url, gh_type, company, blog, location, bio, created_at
