@@ -31,7 +31,7 @@ async def kakashi(ded):
 @bot.on(sudo_cmd(pattern="killer (.*)",allow_sudo=True))
 async def kakashi(killer):
     name = killer.pattern_match.group(1)
-    await edit_or_reply(killer
+    await edit_or_reply(killer ,
         f"__**Commando **__{DEF}          \n\n"
         "_/﹋\_\n"
         "(҂`_´)\n"
