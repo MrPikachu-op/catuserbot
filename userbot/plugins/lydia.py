@@ -106,7 +106,7 @@ async def on_new_message(event):
             # Try to think a thought.
             try:
                 async with event.client.action(event.chat_id, "location"):
-                    await asyncio.sleep(5)
+                    await asyncio.sleep(2)
                     output = lydia.think_thought(session_id, query)
                     await event.reply(output)
             except cf.exception.CoffeeHouseError as e:
