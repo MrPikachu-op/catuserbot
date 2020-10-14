@@ -15,9 +15,10 @@ from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import ChatBannedRights, MessageEntityMentionName
 
 import userbot.plugins.sql_helper.gban_sql_helper as gban_sql
-from . import CAT_ID, CMD_HELP, admin_groups, BOTLOG, BOTLOG_CHATID
+
+from ..utils import admin_cmd, edit_or_reply, sudo_cmd
+from . import BOTLOG, BOTLOG_CHATID, CAT_ID, CMD_HELP, admin_groups
 from .sql_helper.mute_sql import is_muted, mute, unmute
-from ..utils import admin_cmd, edit_or_reply , sudo_cmd
 
 BANNED_RIGHTS = ChatBannedRights(
     until_date=None,
@@ -46,7 +47,7 @@ UNBAN_RIGHTS = ChatBannedRights(
 @borg.on(admin_cmd(pattern=r"gban(?: |$)(.*)"))
 @borg.on(sudo_cmd(pattern=r"gban(?: |$)(.*)", allow_sudo=True))
 async def catgban(cat):
-    cate = await edit_or_reply( cat , "gbaning.......")
+    cate = await edit_or_reply(cat, "gbaning.......")
     start = datetime.now()
     user, reason = await get_user_from_event(cat)
     if not user:
@@ -118,7 +119,7 @@ async def catgban(cat):
 @borg.on(admin_cmd(pattern=r"ungban(?: |$)(.*)"))
 @borg.on(sudo_cmd(pattern=r"ungban(?: |$)(.*)", allow_sudo=True))
 async def catgban(cat):
-    cate = await edit_or_reply(cat , "ungbaning.....")
+    cate = await edit_or_reply(cat, "ungbaning.....")
     start = datetime.now()
     user, reason = await get_user_from_event(cat)
     if not user:
@@ -199,7 +200,7 @@ async def gablist(event):
             )
             await event.delete()
     else:
-        await edit_or_reply(event ,GBANNED_LIST)
+        await edit_or_reply(event, GBANNED_LIST)
 
 
 @borg.on(admin_cmd(outgoing=True, pattern=r"gmute ?(\d+)?"))
@@ -222,18 +223,18 @@ async def startgmute(event):
     elif private is True:
         userid = event.chat_id
     else:
-        return await edit_or_reply(event ,
-            "Please reply to a user or add their into the command to gmute them."
+        return await edit_or_reply(
+            event, "Please reply to a user or add their into the command to gmute them."
         )
     replied_user = await event.client(GetFullUserRequest(userid))
     if is_muted(userid, "gmute"):
-        return await edit_or_reply(event ,"This user is already gmuted")
+        return await edit_or_reply(event, "This user is already gmuted")
     try:
         mute(userid, "gmute")
     except Exception as e:
-        await edit_or_reply(event ,"Error occured!\nError is " + str(e))
+        await edit_or_reply(event, "Error occured!\nError is " + str(e))
     else:
-        await edit_or_reply(event ,"Successfully gmuted that person")
+        await edit_or_reply(event, "Successfully gmuted that person")
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
@@ -262,18 +263,19 @@ async def endgmute(event):
     elif private is True:
         userid = event.chat_id
     else:
-        return await edit_or_reply(event ,
-            "Please reply to a user or add their into the command to ungmute them."
+        return await edit_or_reply(
+            event,
+            "Please reply to a user or add their into the command to ungmute them.",
         )
     replied_user = await event.client(GetFullUserRequest(userid))
     if not is_muted(userid, "gmute"):
-        return await edit_or_reply(event ,"This user is not gmuted")
+        return await edit_or_reply(event, "This user is not gmuted")
     try:
         unmute(userid, "gmute")
     except Exception as e:
-        await edit_or_reply(event ,"Error occured!\nError is " + str(e))
+        await edit_or_reply(event, "Error occured!\nError is " + str(e))
     else:
-        await edit_or_reply(event ,"Successfully ungmuted that person")
+        await edit_or_reply(event, "Successfully ungmuted that person")
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
@@ -281,6 +283,7 @@ async def endgmute(event):
             f"USER: [{replied_user.user.first_name}](tg://user?id={userid})\n"
             f"CHAT: {event.chat.title}(`{event.chat_id}`)",
         )
+
 
 @command(incoming=True)
 async def watcher(event):
