@@ -96,7 +96,7 @@ async def _(event):
 
 
 @bot.on(admin_cmd(pattern="get_bots ?(.*)", outgoing=True))
-@bot.on(admin_cmd(pattern="get_bots ?(.*)", allow_sudo=True))
+@bot.on(sudo_cmd(pattern="get_bots ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
