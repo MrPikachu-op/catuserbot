@@ -5,8 +5,8 @@ from datetime import datetime
 import requests
 from github import Github
 
+from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 from . import CMD_HELP
-from ..utils import admin_cmd,edit_or_reply , sudo_cmd
 
 GIT_TEMP_DIR = "./temp/"
 
@@ -48,7 +48,7 @@ async def _(event):
         )
         await event.delete()
     else:
-        await edit_or_reply(event , "`{}`: {}".format(input_str, r.text))
+        await edit_or_reply(event, "`{}`: {}".format(input_str, r.text))
 
 
 @bot.on(admin_cmd(pattern="commit$", outgoing=True))
@@ -57,12 +57,14 @@ async def download(event):
     if event.fwd_from:
         return
     if Var.GITHUB_ACCESS_TOKEN is None:
-        await edit_or_reply(event ,"`Please ADD Proper Access Token from github.com`")
+        await edit_or_reply(event, "`Please ADD Proper Access Token from github.com`")
         return
     if Var.GIT_REPO_NAME is None:
-        await edit_or_reply(event ,"`Please ADD Proper Github Repo Name of your userbot`")
+        await edit_or_reply(
+            event, "`Please ADD Proper Github Repo Name of your userbot`"
+        )
         return
-    mone = edit_or_reply(event ,"Processing ...")
+    mone = edit_or_reply(event, "Processing ...")
     if not os.path.isdir(GIT_TEMP_DIR):
         os.makedirs(GIT_TEMP_DIR)
     start = datetime.now()
