@@ -55,6 +55,10 @@ async def _(event):
             os.remove(downloaded_file_name)
         else:
             message = previous_message.message
+    else:
+        message = (
+                    "**Usage : **`.paste <long text to include/reply to text file>`"
+                )
     url = "https://del.dog/documents"
     r = requests.post(url, data=message.encode("UTF-8")).json()
     url = f"https://del.dog/{r['key']}"
@@ -76,6 +80,7 @@ async def _(event):
     input_str = "".join(event.text.split(maxsplit=1)[1:])
     if input_str:
         message = input_str
+        downloaded_file_name = None
     elif event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
         if previous_message.media:
@@ -92,12 +97,18 @@ async def _(event):
                     message += m.decode("UTF-8") + "\r\n"
             except:
                 message = (
-                    "**Usage : **`.paste <long text to include/reply to text file>`"
+                    "**Usage : **`.neko <long text to include/reply to text file>`"
                 )
             os.remove(downloaded_file_name)
         else:
+            downloaded_file_name = None
             message = previous_message.message
-    if downloaded_file_name.endswith(".py"):
+    else:
+        downloaded_file_name = None
+        message = (
+                    "**Usage : **`.neko <long text to include/reply to text file>`"
+                )
+    if downloaded_file_name and downloaded_file_name.endswith(".py"):
         py_file = ".py"
         data = message
         key = (
@@ -148,6 +159,10 @@ async def _(event):
             os.remove(downloaded_file_name)
         else:
             message = previous_message.message
+    else:
+        message = (
+                    "**Usage : **`.paste <long text to include/reply to text file>`"
+                )
     url = "https://www.iffuci.tk/documents"
     r = requests.post(url, data=message.encode("UTF-8")).json()
     url = f"https://iffuci.tk/{r['key']}"
@@ -230,6 +245,10 @@ async def _(event):
             os.remove(downloaded_file_name)
         else:
             message = previous_message.message
+    else:
+        message = (
+                    "**Usage : **`.paste <long text to include/reply to text file>`"
+                )
     url = "https://del.dog/documents"
     r = requests.post(url, data=message.encode("UTF-8")).json()
     url = f"https://del.dog/{r['key']}"
