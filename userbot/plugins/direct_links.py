@@ -1,4 +1,3 @@
-
 # CatUserbot module containing various sites direct links generators
 
 # Copyright (C) 2019 The Raphielscape Company LLC.
@@ -17,15 +16,15 @@ import requests
 from bs4 import BeautifulSoup
 from humanize import naturalsize
 
-from . import CMD_HELP
 from ..utils import admin_cmd, edit_or_reply, sudo_cmd
+from . import CMD_HELP
 
 
 @bot.on(admin_cmd(outgoing=True, pattern=r"direct(?: |$)([\s\S]*)"))
 @bot.on(sudo_cmd(allow_sudo=True, pattern=r"direct(?: |$)([\s\S]*)"))
 async def direct_link_generator(request):
     """ direct links generator """
-    catevent = await edit_or_reply(request , "`Processing...`")
+    catevent = await edit_or_reply(request, "`Processing...`")
     textx = await request.get_reply_message()
     message = request.pattern_match.group(1)
     if message:
