@@ -8,8 +8,9 @@ No Logic Pligon for @PepeBot
 \nType .logic to see many logical fact
 """
 
-from asyncio import sleep
 import random
+from asyncio import sleep
+
 from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
@@ -18,7 +19,7 @@ from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 async def _(event):
     if event.fwd_from:
         return
-    event = await edit_or_reply(event ,"Singing...")
+    event = await edit_or_reply(event, "Singing...")
     await sleep(2)
     x = random.randrange(1, 33)
     if x == 1:
@@ -158,7 +159,7 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
-    event = await edit_or_reply(event , "`.....`")
+    event = await edit_or_reply(event, "`.....`")
     await sleep(2)
     x = random.randrange(1, 40)
     if x == 1:
@@ -248,7 +249,7 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
-    event = await edit_or_reply(event , "Typing...")
+    event = await edit_or_reply(event, "Typing...")
     await sleep(2)
     x = random.randrange(1, 40)
     if x == 1:
@@ -1302,11 +1303,11 @@ async def _(event):
 
 
 @bot.on(admin_cmd(pattern=r"qt$"))
-@bot.on(sudo_cmd(pattern=r"qt$",allow_sudo=True))
+@bot.on(sudo_cmd(pattern=r"qt$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    event = await edit_or_reply(event,"selecting question...")
+    event = await edit_or_reply(event, "selecting question...")
     await sleep(2)
     x = random.randrange(1, 60)
     if x == 1:
@@ -1488,6 +1489,7 @@ async def _(event):
             '`"What’s something you misunderstood as a child and only realized much later was wrong?"`'
         )
 
+
 @bot.on(admin_cmd(pattern=f"logic$", outgoing=True))
 @bot.on(sudo_cmd(pattern=f"logic$", allow_sudo=True))
 async def _(event):
@@ -1495,7 +1497,7 @@ async def _(event):
         return
     await asyncio.sleep(0.5)
     x = random.randrange(1, 104)
-    event = await edit_or_reply(event , "`Wait me getting a logic for you`")
+    event = await edit_or_reply(event, "`Wait me getting a logic for you`")
     await sleep(2)
     if x == 1:
         await event.edit(
@@ -2060,4 +2062,3 @@ async def _(event):
     if x == 104:
 
         await event.edit("`Do You Know, We can't see Ghosts But Ghosts Can see Us...`")
- 
