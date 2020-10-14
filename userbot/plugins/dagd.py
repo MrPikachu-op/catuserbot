@@ -68,6 +68,7 @@ async def _(event):
             "Input URL {} returned status_code {}".format(input_str, r.status_code),
         )
 
+
 # By Priyam Kalra
 @borg.on(admin_cmd(pattern="hl ?(.*)"))
 @borg.on(sudo_cmd(pattern="hl ?(.*)", allow_sudo=True))
@@ -76,7 +77,8 @@ async def _(event):
         return
     input = event.pattern_match.group(1)
     await edit_or_reply(event, "[ㅤㅤㅤㅤㅤㅤㅤ](" + input + ")")
-    
+
+
 CMD_HELP.update(
     {
         "ping": "**Syntax :** `.dns link`\
