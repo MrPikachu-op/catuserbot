@@ -1,22 +1,26 @@
 import string
+
+from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 from . import CMD_HELP
-from ..utils import admin_cmd, edit_or_reply , sudo_cmd
+
 msg_cache = {}
 
+
 @bot.on(admin_cmd(pattern="frwd$"))
-@bot.on(sudo_cmd(pattern="frwd$",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="frwd$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     if Config.PRIVATE_CHANNEL_BOT_API_ID is None:
-        await edit_or_reply( event ,
-            "Please set the required environment variable `PRIVATE_CHANNEL_BOT_API_ID` for this plugin to work"
+        await edit_or_reply(
+            event,
+            "Please set the required environment variable `PRIVATE_CHANNEL_BOT_API_ID` for this plugin to work",
         )
         return
     try:
         e = await event.client.get_entity(Config.PRIVATE_CHANNEL_BOT_API_ID)
     except Exception as e:
-        await edit_or_reply( event ,str(e))
+        await edit_or_reply(event, str(e))
     else:
         re_message = await event.get_reply_message()
         # https://t.me/telethonofftopic/78166
@@ -26,7 +30,7 @@ async def _(event):
 
 
 @bot.on(admin_cmd(pattern=r"fpost\s+(.*)"))
-@bot.on(sudo_cmd(pattern="fpost\s+(.*)",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="fpost\s+(.*)", allow_sudo=True))
 async def _(event):
     await event.delete()
     text = event.pattern_match.group(1)
@@ -42,10 +46,12 @@ async def _(event):
         await event.client.forward_messages(destination, msg_cache[c])
 
 
-CMD_HELP.update({
-    "forward":"**Plugin : **`forward`\
+CMD_HELP.update(
+    {
+        "forward": "**Plugin : **`forward`\
     \n\n**Synatax : **`frwd reply to any message`\
     \n**Function :  **Enable Seen Counter in any message, to know how many users have seen your message\
     \n\n**Syntax : **`.fpost text`\
     \n**Function : **Split the word and forwards each letter from the messages cache if exists "
-})        
+    }
+)
