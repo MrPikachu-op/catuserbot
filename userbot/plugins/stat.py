@@ -12,7 +12,9 @@ from . import CMD_HELP
 
 @bot.on(admin_cmd(pattern="stat$"))
 @bot.on(sudo_cmd(pattern="stat$", allow_sudo=True))
-async def stats(event: NewMessage.Event,) -> None:  # pylint: disable = R0912, R0914, R0915
+async def stats(
+    event: NewMessage.Event,
+) -> None:  # pylint: disable = R0912, R0914, R0915
     """Command to get stats about the account"""
     cat = await edit_or_reply(event, "`Collecting stats, Wait man`")
     start_time = time.time()
