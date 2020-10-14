@@ -71,7 +71,7 @@ async def _(event):
 @bot.on(sudo_cmd(pattern="neko( (.*)|$)",allow_sudo=True))
 async def _(event):
     catevent = await edit_or_reply(event,"`pasting to neko bin.....`")
-    input_str = "".join(event.text.split(maxsplit=1)[1:]
+    input_str = "".join(event.text.split(maxsplit=1)[1:])
     if input_str:
         message = input_str
     elif event.reply_to_msg_id:
