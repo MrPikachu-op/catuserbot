@@ -32,15 +32,15 @@ async def gethash(hash_q):
     runapp(["rm", "hashdis.txt"], stdout=PIPE)
     sha512 = sha512.stdout.decode()
     ans = (
-        "Text: `"
+        "**Text : **`"
         + hashtxt_
-        + "`\nMD5: `"
+        + "`\n**MD5 : **`"
         + md5
-        + "`SHA1: `"
+        + "`**SHA1 : **`"
         + sha1
-        + "`SHA256: `"
+        + "`**SHA256 : **`"
         + sha256
-        + "`SHA512: `"
+        + "`**SHA512 : **`"
         + sha512[:-1]
         + "`"
     )
