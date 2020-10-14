@@ -5,9 +5,11 @@
 
 
 import os
+
 import requests
-from . import CMD_HELP
+
 from ..utils import admin_cmd, edit_or_reply, sudo_cmd
+from . import CMD_HELP
 
 OCR_SPACE_API_KEY = Config.OCR_SPACE_API_KEY
 
@@ -60,6 +62,7 @@ async def ocr(event):
     else:
         await catevent.edit(f"`Here's what I could read from it:`\n\n{ParsedText}")
     os.remove(downloaded_file_name)
+
 
 CMD_HELP.update(
     {
