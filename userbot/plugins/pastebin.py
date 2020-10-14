@@ -47,7 +47,7 @@ async def _(event):
             message = ""
             try:
                 for m in m_list:
-                    message += m.decode("UTF-8") + "\r\n"
+                    message += m.decode("UTF-8")
             except:
                 message = (
                     "**Usage : **`.paste <long text to include/reply to text file>`"
@@ -92,7 +92,7 @@ async def _(event):
             message = ""
             try:
                 for m in m_list:
-                    message += m.decode("UTF-8") + "\r\n"
+                    message += m.decode("UTF-8")
             except:
                 message = (
                     "**Usage : **`.neko <long text to include/reply to text file>`"
@@ -147,7 +147,7 @@ async def _(event):
             message = ""
             try:
                 for m in m_list:
-                    message += m.decode("UTF-8") + "\r\n"
+                    message += m.decode("UTF-8")
             except:
                 message = (
                     "**Usage : **`.paste <long text to include/reply to text file>`"
@@ -231,7 +231,7 @@ async def _(event):
             message = ""
             try:
                 for m in m_list:
-                    message += m.decode("UTF-8") + "\r\n"
+                    message += m.decode("UTF-8")
             except:
                 message = (
                     "**Usage : **`.paste <long text to include/reply to text file>`"
