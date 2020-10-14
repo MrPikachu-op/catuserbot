@@ -57,7 +57,7 @@ async def wiki(wiki_q):
 
 
 @bot.on(admin_cmd(pattern="imdb (.*)", outgoing=True))
-@bot.on(sudo_cmd(pattern="imdb (.*)", oallow_sudo=True))
+@bot.on(sudo_cmd(pattern="imdb (.*)", allow_sudo=True))
 async def imdb(e):
     catevent = await edit_or_reply(e, "`searching........")
     try:
