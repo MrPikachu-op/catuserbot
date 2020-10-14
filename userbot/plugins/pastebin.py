@@ -229,21 +229,20 @@ async def _(event):
     url = f"https://del.dog/{r['key']}"
     chat = "@chotamreaderbot"
     # This module is modded by @ViperAdnan #KeepCredit
-    else:
-        await catevent.edit("**Making instant view...**")
-        async with event.client.conversation(chat) as conv:
-            try:
-                response = conv.wait_event(
-                    events.NewMessage(incoming=True, from_users=272572121)
+   await catevent.edit("**Making instant view...**")
+   async with event.client.conversation(chat) as conv:
+       try:
+            response = conv.wait_event(
+                events.NewMessage(incoming=True, from_users=272572121)
                 )
-                await event.client.send_message(chat, url)
-                response = await response
-            except YouBlockedUserError:
-                await catevent.edit("```Please unblock me (@chotamreaderbot) u Nigga```")
-                return
-            await catevent.delete()
-            await event.client.send_message(
-                event.chat_id, response.message, reply_to=previous_message
+            await event.client.send_message(chat, url)
+            response = await response
+        except YouBlockedUserError:
+            await catevent.edit("```Please unblock me (@chotamreaderbot) u Nigga```")
+            return
+        await catevent.delete()
+        await event.client.send_message(
+            event.chat_id, response.message, reply_to=previous_message
             )
 
 
