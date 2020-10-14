@@ -15,7 +15,7 @@ from userbot.plugins import (
     trumptweet,
     tweets,
 )
-from . import CMD_HELP
+
 from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
@@ -33,12 +33,12 @@ async def nekobot(cat):
             if not reply_to_id.media:
                 text = reply_to_id.message
             else:
-                await edit_or_reply(cat , "Send you text to trump so he can tweet.")
+                await edit_or_reply(cat, "Send you text to trump so he can tweet.")
                 return
         else:
-            await edit_or_reply(cat ,"send you text to trump so he can tweet.")
+            await edit_or_reply(cat, "send you text to trump so he can tweet.")
             return
-    cate = await edit_or_reply(cat ,"Requesting trump to tweet...")
+    cate = await edit_or_reply(cat, "Requesting trump to tweet...")
     try:
         hmm = pybase64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
         hmm = Get(hmm)
@@ -64,12 +64,12 @@ async def nekobot(cat):
             if not reply_to_id.media:
                 text = reply_to_id.message
             else:
-                await edit_or_reply(cat ,"Send you text to modi so he can tweet.")
+                await edit_or_reply(cat, "Send you text to modi so he can tweet.")
                 return
         else:
-            await edit_or_reply(cat ,"send you text to modi so he can tweet.")
+            await edit_or_reply(cat, "send you text to modi so he can tweet.")
             return
-    cate = await edit_or_reply(cat ,"Requesting modi to tweet...")
+    cate = await edit_or_reply(cat, "Requesting modi to tweet...")
     try:
         hmm = pybase64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
         hmm = Get(hmm)
@@ -94,9 +94,9 @@ async def nekobot(cat):
         if cat.is_reply and not reply_to_id.media:
             text = reply_to_id.message
         else:
-            await edit_or_reply(cat ,"Give text for to write on banner, man")
+            await edit_or_reply(cat, "Give text for to write on banner, man")
             return
-    cate = await edit_or_reply(cat ,"Your banner is under creation wait a sec...")
+    cate = await edit_or_reply(cat, "Your banner is under creation wait a sec...")
     try:
         hmm = pybase64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
         hmm = Get(hmm)
@@ -122,12 +122,12 @@ async def nekobot(cat):
             if not reply_to_id.media:
                 text = reply_to_id.message
             else:
-                await edit_or_reply(cat ,"what should kanna write give text ")
+                await edit_or_reply(cat, "what should kanna write give text ")
                 return
         else:
-            await edit_or_reply(cat ,"what should kanna write give text")
+            await edit_or_reply(cat, "what should kanna write give text")
             return
-    cate = await edit_or_reply(cat ,"Kanna is writing your text...")
+    cate = await edit_or_reply(cat, "Kanna is writing your text...")
     try:
         hmm = pybase64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
         hmm = Get(hmm)
@@ -156,8 +156,9 @@ async def nekobot(cat):
         if cat.is_reply and not reply_to_id.media:
             text = reply_to_id.message
         else:
-            await edit_or_reply(cat ,
-                "what should i tweet? Give some text and format must be like `.tweet username | your text` "
+            await edit_or_reply(
+                cat,
+                "what should i tweet? Give some text and format must be like `.tweet username | your text` ",
             )
             return
     try:
@@ -169,11 +170,12 @@ async def nekobot(cat):
     if "|" in text:
         username, text = text.split("|")
     else:
-        await edit_or_reply(cat ,
-            "what should i tweet? Give some text and format must be like `.tweet username | your text`"
+        await edit_or_reply(
+            cat,
+            "what should i tweet? Give some text and format must be like `.tweet username | your text`",
         )
         return
-    cate = await edit_or_reply(cat ,f"Requesting {username} to tweet...")
+    cate = await edit_or_reply(cat, f"Requesting {username} to tweet...")
     text = deEmojify(text)
     catfile = await tweets(text, username)
     await cat.client.send_file(cat.chat_id, catfile, reply_to=reply_to_id)
