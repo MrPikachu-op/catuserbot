@@ -127,7 +127,7 @@ async def git_commit(file_name, mone):
 
 CMD_HELP.update(
     {
-        "github": "**Plugin : **`github\
+        "github": "**Plugin : **`github`\
         \n\n**Syntax : **`.github USERNAME`\
         \n**Function : ** __Get information about an user on GitHub of given username__\
         \n\n**Syntax : **`.commit reply to python file to upload to github`\
