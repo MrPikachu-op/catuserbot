@@ -183,7 +183,7 @@ async def carbon_api(e):
     chrome_options.add_argument("--disable-gpu")
     prefs = {"download.default_directory": "./"}
     chrome_options.add_experimental_option("prefs", prefs)
-    await .edit("🔳🔳🔲🔲🔲")
+    await cat.edit("🔳🔳🔲🔲🔲")
 
     driver = webdriver.Chrome(
         executable_path=Config.CHROME_DRIVER, options=chrome_options
