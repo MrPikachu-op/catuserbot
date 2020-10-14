@@ -13,7 +13,7 @@ async def _(event):
     event = await edit_or_reply(event, "`stars.....`")
     deq = deque(list("🦋✨🦋✨🦋✨🦋✨"))
     for _ in range(48):
-        await asyncio.sleep(0.1)
+        await asyncio.sleep(0.3)
         await event.edit("".join(deq))
         deq.rotate(1)
 
@@ -24,7 +24,7 @@ async def _(event):
     event = await edit_or_reply(event, "`boxs...`")
     deq = deque(list("🟥🟧🟨🟩🟦🟪🟫⬛⬜"))
     for _ in range(999):
-        await asyncio.sleep(0.1)
+        await asyncio.sleep(0.3)
         await event.edit("".join(deq))
         deq.rotate(1)
 
@@ -35,7 +35,7 @@ async def _(event):
     event = await edit_or_reply(event, "`Raining.......`")
     deq = deque(list("🌬☁️🌩🌨🌧🌦🌥⛅🌤"))
     for _ in range(48):
-        await asyncio.sleep(0.1)
+        await asyncio.sleep(0.3)
         await event.edit("".join(deq))
         deq.rotate(1)
 
