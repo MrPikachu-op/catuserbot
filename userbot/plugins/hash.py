@@ -11,7 +11,7 @@ from subprocess import run as runapp
 import pybase64
 
 from .. import CMD_HELP
-from ..utils import admin_cmd, edit_or_reply, sudo_cmd, errors_handler
+from ..utils import admin_cmd, edit_or_reply, errors_handler, sudo_cmd
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="hash (.*)"))
@@ -55,7 +55,7 @@ async def gethash(hash_q):
         )
         runapp(["rm", "hashes.txt"], stdout=PIPE)
     else:
-        await edit_or_reply( hash_q, ans)
+        await edit_or_reply(hash_q, ans)
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="hbase (en|de) (.*)"))
@@ -67,14 +67,14 @@ async def endecrypt(query):
         lething = str(pybase64.b64encode(bytes(query.pattern_match.group(2), "utf-8")))[
             2:
         ]
-        await edit_or_reply(query , "Shhh! It's Encoded: `" + lething[:-1] + "`")
+        await edit_or_reply(query, "Shhh! It's Encoded: `" + lething[:-1] + "`")
     else:
         lething = str(
             pybase64.b64decode(
                 bytes(query.pattern_match.group(2), "utf-8"), validate=True
             )
         )[2:]
-        await edit_or_reply( query , "Decoded: `" + lething[:-1] + "`")
+        await edit_or_reply(query, "Decoded: `" + lething[:-1] + "`")
 
 
 CMD_HELP.update(
