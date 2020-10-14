@@ -172,6 +172,7 @@ async def stylish_generator(event):
             string = string.replace(normaltextcharacter, superscriptcharacter)
     await edit_or_reply(event, string)
 
+
 CMD_HELP.update(
     {
         "funnyfonts": ".cp (text) or .cp reply to message \
