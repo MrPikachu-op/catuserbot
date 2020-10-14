@@ -50,13 +50,13 @@ async def _(event):
                     message += m.decode("UTF-8")
             except:
                 message = (
-                    "**Usage : **`.paste <long text to include/reply to text file>`"
+                    "Usage : .paste <long text to include/reply to text file>"
                 )
             os.remove(downloaded_file_name)
         else:
             message = previous_message.message
     else:
-        message = "**Usage : **`.paste <long text to include/reply to text file>`"
+        message = "Usage : .paste <long text to include/reply to text file>"
     url = "https://del.dog/documents"
     r = requests.post(url, data=message.encode("UTF-8")).json()
     url = f"https://del.dog/{r['key']}"
@@ -150,13 +150,13 @@ async def _(event):
                     message += m.decode("UTF-8")
             except:
                 message = (
-                    "**Usage : **`.paste <long text to include/reply to text file>`"
+                    "Usage : .paste <long text to include/reply to text file>"
                 )
             os.remove(downloaded_file_name)
         else:
             message = previous_message.message
     else:
-        message = "**Usage : **`.paste <long text to include/reply to text file>`"
+        message = "Usage : .paste <long text to include/reply to text file>"
     url = "https://www.iffuci.tk/documents"
     r = requests.post(url, data=message.encode("UTF-8")).json()
     url = f"https://iffuci.tk/{r['key']}"
@@ -234,13 +234,13 @@ async def _(event):
                     message += m.decode("UTF-8")
             except:
                 message = (
-                    "**Usage : **`.paste <long text to include/reply to text file>`"
+                    "Usage : .paste <long text to include/reply to text file>"
                 )
             os.remove(downloaded_file_name)
         else:
             message = previous_message.message
     else:
-        message = "**Usage : **`.paste <long text to include/reply to text file>`"
+        message = "Usage : .paste <long text to include/reply to text file>"
     url = "https://del.dog/documents"
     r = requests.post(url, data=message.encode("UTF-8")).json()
     url = f"https://del.dog/{r['key']}"
