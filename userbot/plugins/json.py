@@ -1,12 +1,12 @@
-
 # yaml_format is imported from uniborg
 import io
-from . import CMD_HELP, yaml_format
+
 from ..utils import admin_cmd, edit_or_reply, sudo_cmd
+from . import yaml_format
 
 
 @bot.on(admin_cmd(pattern="json$"))
-@bot.on(sudo_cmd(pattern="json$",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="json$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -33,8 +33,9 @@ async def _(event):
     else:
         await edit_or_reply(event, "`{}`".format(the_real_message))
 
+
 @bot.on(admin_cmd(pattern="yaml$"))
-@bot.on(sudo_cmd(pattern="yaml$",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="yaml$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
