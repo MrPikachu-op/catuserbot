@@ -1,12 +1,12 @@
-#credits to @mrconfused (@sandy1709)
+# credits to @mrconfused (@sandy1709)
 import io
 import os
 
 import lyricsgenius
 from tswift import Song
 
-from . import CMD_HELP
 from ..utils import admin_cmd, edit_or_reply, sudo_cmd
+from . import CMD_HELP
 
 GENIUS = os.environ.get("GENIUS_API_TOKEN", None)
 
@@ -14,7 +14,7 @@ GENIUS = os.environ.get("GENIUS_API_TOKEN", None)
 @bot.on(admin_cmd(outgoing=True, pattern="lyrics ?(.*)"))
 @bot.on(sudo_cmd(allow_sudo=True, pattern="lyrics ?(.*)"))
 async def _(event):
-    catevent = await edit_or_reply(event , "wi8..! I am searching your lyrics....`")
+    catevent = await edit_or_reply(event, "wi8..! I am searching your lyrics....`")
     reply_to_id = event.message.id
     if event.reply_to_msg_id:
         reply_to_id = event.reply_to_msg_id
@@ -57,18 +57,21 @@ async def lyrics(lyric):
     if lyric.pattern_match.group(1):
         query = lyric.pattern_match.group(1)
     else:
-        await edit_or_reply(lyric ,
-            "Error: please use '-' as divider for <artist> and <song> \neg: `.glyrics Nicki Minaj - Super Bass`"
+        await edit_or_reply(
+            lyric,
+            "Error: please use '-' as divider for <artist> and <song> \neg: `.glyrics Nicki Minaj - Super Bass`",
         )
         return
     if r"-" not in query:
-        await edit_or_reply(lyric ,
-            "Error: please use '-' as divider for <artist> and <song> \neg: `.glyrics Nicki Minaj - Super Bass`"
+        await edit_or_reply(
+            lyric,
+            "Error: please use '-' as divider for <artist> and <song> \neg: `.glyrics Nicki Minaj - Super Bass`",
         )
         return
     if GENIUS is None:
-        await edit_or_reply(lyric ,
-            "`Provide genius access token to config.py or Heroku Var first kthxbye!`"
+        await edit_or_reply(
+            lyric,
+            "`Provide genius access token to config.py or Heroku Var first kthxbye!`",
         )
     else:
         genius = lyricsgenius.Genius(GENIUS)
@@ -77,12 +80,14 @@ async def lyrics(lyric):
             artist = args[0].strip(" ")
             song = args[1].strip(" ")
         except Exception as e:
-            await edit_or_reply(lyric ,f"Error:\n`{e}`")
+            await edit_or_reply(lyric, f"Error:\n`{e}`")
             return
     if len(args) < 1:
-        await edit_or_reply(lyric ,"`Please provide artist and song names`")
+        await edit_or_reply(lyric, "`Please provide artist and song names`")
         return
-    catevent = await edit_or_reply(lyric ,f"`Searching lyrics for {artist} - {song}...`")
+    catevent = await edit_or_reply(
+        lyric, f"`Searching lyrics for {artist} - {song}...`"
+    )
     try:
         songs = genius.search_song(song, artist)
     except TypeError:
