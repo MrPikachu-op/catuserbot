@@ -17,7 +17,7 @@ async def _(event):
         await edit_or_reply(event , "```Reply to a Link```")
         return
     chat = "@chotamreaderbot"
-    acatevent = wait edit_or_reply(event ,"```Processing```")
+    catevent = await edit_or_reply(event ,"```Processing```")
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
