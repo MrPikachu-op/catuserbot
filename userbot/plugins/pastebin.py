@@ -49,9 +49,7 @@ async def _(event):
                 for m in m_list:
                     message += m.decode("UTF-8")
             except:
-                message = (
-                    "Usage : .paste <long text to include/reply to text file>"
-                )
+                message = "Usage : .paste <long text to include/reply to text file>"
             os.remove(downloaded_file_name)
         else:
             message = previous_message.message
@@ -149,9 +147,7 @@ async def _(event):
                 for m in m_list:
                     message += m.decode("UTF-8")
             except:
-                message = (
-                    "Usage : .paste <long text to include/reply to text file>"
-                )
+                message = "Usage : .paste <long text to include/reply to text file>"
             os.remove(downloaded_file_name)
         else:
             message = previous_message.message
@@ -233,9 +229,7 @@ async def _(event):
                 for m in m_list:
                     message += m.decode("UTF-8")
             except:
-                message = (
-                    "Usage : .paste <long text to include/reply to text file>"
-                )
+                message = "Usage : .paste <long text to include/reply to text file>"
             os.remove(downloaded_file_name)
         else:
             message = previous_message.message
