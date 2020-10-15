@@ -61,9 +61,7 @@ async def handler(event):
         await event.delete()
     except BaseException:
         pass
-    nonlocal docs
-    if docs is None:
-        docs = [
+    docs = [
             utils.get_input_document(x)
             for x in (
                 await borg(
@@ -85,9 +83,7 @@ async def handler(event):
         await event.delete()
     except BaseException:
         pass
-    nonlocal docs
-    if docs is None:
-        docs = [
+    docs = [
             utils.get_input_document(x)
             for x in (
                 await borg(
