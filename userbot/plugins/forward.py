@@ -28,8 +28,9 @@ async def _(event):
         await event.client.forward_messages(event.chat_id, fwd_message)
         await event.delete()
 
+
 @bot.on(admin_cmd(pattern="resend$"))
-@bot.on(sudo_cmd(pattern="resend$",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="resend$", allow_sudo=True))
 async def _(event):
     try:
         await event.delete()
@@ -39,8 +40,8 @@ async def _(event):
     if not m:
         return
     await event.respond(m)
-    
-    
+
+
 @bot.on(admin_cmd(pattern=r"fpost\s+(.*)"))
 @bot.on(sudo_cmd(pattern="fpost\s+(.*)", allow_sudo=True))
 async def _(event):
