@@ -3,11 +3,10 @@ import os
 import time
 from datetime import datetime
 
-from ..utils import admin_cmd, sudo_cmd
+from ..utils import admin_cmd, sudo_cmd,edit_or_reply
 from . import ALIVE_NAME, progress
 
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "thumb_image.jpg"
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "cat"
 
 
 @borg.on(admin_cmd(pattern="rename (.*)"))
