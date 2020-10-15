@@ -14,8 +14,8 @@ from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 from . import CMD_HELP, awooify, baguette, iphonex, lolice
 
 
-@bot.on(admin_cmd("mask$"))
-@bot.on(sudo_cmd(pattern="mask$, allow_sudo=True))
+@bot.on(admin_cmd("mask$",outgoing=True))
+@bot.on(sudo_cmd(pattern="mask$", allow_sudo=True))
 async def _(catbot):
     reply_message = await catbot.get_reply_message()
     if not reply_message.media or not reply_message:
