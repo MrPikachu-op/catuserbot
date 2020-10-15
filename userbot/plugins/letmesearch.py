@@ -143,7 +143,7 @@ async def _(event):
         await event.edit("Something went wrong. Please try again later.")
 
 
-@borg.on(admin_cmd(pattern="dyno(.*)"))
+@borg.on(admin_cmd(pattern="dyno (.*)"))
 @borg.on(sudo_cmd(pattern="dyno (.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
