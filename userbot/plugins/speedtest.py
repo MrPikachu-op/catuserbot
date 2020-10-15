@@ -5,9 +5,7 @@ from datetime import datetime
 
 import speedtest
 
-
-from .. import CMD_HELP
-from ..utils import admin_cmd, edit_or_reply, sudo_cmd
+from ..utils import admin_cmd
 
 
 @borg.on(admin_cmd(pattern="speedtest ?(.*)"))
