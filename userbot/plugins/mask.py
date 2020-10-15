@@ -1,6 +1,6 @@
- """
-credits to @mrconfused and @sandy1709
-"""
+
+#credits to @mrconfused and @sandy1709
+
 #    Copyright (C) 2020  sandeep.n(π.$)
 
 import os
