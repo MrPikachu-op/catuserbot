@@ -3,9 +3,7 @@ import asyncio
 import requests
 from telethon import functions
 
-from userbot import ALIVE_NAME
-
-from .. import CMD_HELP, CMD_LIST, SUDO_LIST, yaml_format
+from . import ALIVE_NAME, CMD_HELP, CMD_LIST, SUDO_LIST, yaml_format
 from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "cat"
@@ -77,7 +75,7 @@ async def cmd_list(event):
         else:
             string = "<b>Please specify which plugin do you want help for !!\
                 \nNumber of plugins : </b><code>{count}</code>\
-                \n<b>Usage:</b> <code>.help</code> <plugin name>\n\n"
+                \n<b>Usage:</b> <code>.help</code> plugin name\n\n"
             catcount = 0
             for i in sorted(CMD_LIST):
                 string += "◆" + f"<code>{str(i)}</code>"
@@ -136,7 +134,7 @@ async def info(event):
     else:
         string = "<b>Please specify which plugin do you want help for !!\
             \nNumber of plugins : </b><code>{count}</code>\
-            \n<b>Usage:</b> <code>.help</code> <plugin name>\n\n"
+            \n<b>Usage:</b> <code>.help</code> plugin name\n\n"
         catcount = 0
         for i in sorted(SUDO_LIST):
             string += "◆" + f"<code>{str(i)}</code>"
