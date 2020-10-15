@@ -3,8 +3,8 @@ import os
 import time
 from datetime import datetime
 
-from ..utils import admin_cmd, sudo_cmd,edit_or_reply
-from . import ALIVE_NAME, progress
+from ..utils import admin_cmd, edit_or_reply, sudo_cmd
+from . import progress
 
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "thumb_image.jpg"
 
