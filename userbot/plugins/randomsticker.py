@@ -62,16 +62,16 @@ async def handler(event):
     except BaseException:
         pass
     docs = [
-            utils.get_input_document(x)
-            for x in (
-                await borg(
-                    functions.messages.GetStickerSetRequest(
-                        types.InputStickerSetShortName("DabOnHaters")
-                    )
+        utils.get_input_document(x)
+        for x in (
+            await borg(
+                functions.messages.GetStickerSetRequest(
+                    types.InputStickerSetShortName("DabOnHaters")
                 )
-            ).documents
-            if x.id not in blacklist
-        ]
+            )
+        ).documents
+        if x.id not in blacklist
+    ]
     await event.respond(file=random.choice(docs))
 
 
@@ -84,16 +84,16 @@ async def handler(event):
     except BaseException:
         pass
     docs = [
-            utils.get_input_document(x)
-            for x in (
-                await borg(
-                    functions.messages.GetStickerSetRequest(
-                        types.InputStickerSetShortName("supermind")
-                    )
+        utils.get_input_document(x)
+        for x in (
+            await borg(
+                functions.messages.GetStickerSetRequest(
+                    types.InputStickerSetShortName("supermind")
                 )
-            ).documents
-            if x.id not in blacklist
-        ]
+            )
+        ).documents
+        if x.id not in blacklist
+    ]
     await event.respond(file=random.choice(docs))
 
 
