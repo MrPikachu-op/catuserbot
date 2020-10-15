@@ -10,20 +10,19 @@ import requests
 from selenium import webdriver
 from validators.url import url
 
-from . import CMD_HELP
-
 from ..utils import admin_cmd, edit_or_reply, sudo_cmd
+from . import CMD_HELP
 
 
 @borg.on(admin_cmd(pattern="ss (.*)"))
-@borg.on(sudo_cmd(pattern="ss (.*)",allow_sudo=True))
+@borg.on(sudo_cmd(pattern="ss (.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     if Config.CHROME_BIN is None:
         await edit_or_reply(event, "Need to install Google Chrome. Module Stopping.")
         return
-    catevent = await edit_or_reply(event,"`Processing ...`")
+    catevent = await edit_or_reply(event, "`Processing ...`")
     start = datetime.now()
     try:
         chrome_options = webdriver.ChromeOptions()
@@ -39,7 +38,9 @@ async def _(event):
         input_str = event.pattern_match.group(1)
         caturl = url(input_str)
         if not caturl:
-            await catevent.edit("the url must be in the format `https://www.google.com`")
+            await catevent.edit(
+                "the url must be in the format `https://www.google.com`"
+            )
             return
         driver.get(input_str)
         await catevent.edit("Calculating Page Dimensions")
@@ -79,17 +80,18 @@ async def _(event):
 
 
 @borg.on(admin_cmd(pattern="scapture (.*)"))
-@borg.on(sudo_cmd(pattern="scapture (.*)",allow_sudo=True))
+@borg.on(sudo_cmd(pattern="scapture (.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     start = datetime.now()
     if Config.SCREEN_SHOT_LAYER_ACCESS_KEY is None:
-        await edit_or_reply(event,
-            "Need to get an API key from https://screenshotlayer.com/product \nModule stopping!"
+        await edit_or_reply(
+            event,
+            "Need to get an API key from https://screenshotlayer.com/product \nModule stopping!",
         )
         return
-    catevent = await edit_or_reply(event,"Processing ...")
+    catevent = await edit_or_reply(event, "Processing ...")
     sample_url = "https://api.screenshotlayer.com/api/capture?access_key={}&url={}&fullpage={}&viewport={}&format={}&force={}"
     input_str = event.pattern_match.group(1)
     caturl = url(input_str)
