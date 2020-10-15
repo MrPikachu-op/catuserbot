@@ -5,13 +5,11 @@ from datetime import datetime
 
 import speedtest
 
-
-from .. import CMD_HELP
 from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
 @borg.on(admin_cmd(pattern="speedtest ?(.*)"))
-@borg.on(sudo_cmd(pattern="speedtest ?(.*)",allow_sudo=True))
+@borg.on(sudo_cmd(pattern="speedtest ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -24,7 +22,9 @@ async def _(event):
         as_document = True
     elif input_str == "text":
         as_text = True
-    catevent = await edit_or_reply(event , "`Calculating my internet speed. Please wait!`")
+    catevent = await edit_or_reply(
+        event, "`Calculating my internet speed. Please wait!`"
+    )
     start = datetime.now()
     s = speedtest.Speedtest()
     s.get_best_server()
