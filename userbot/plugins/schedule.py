@@ -10,6 +10,10 @@ async def _(event):
     cat = ("".join(event.text.split(maxsplit=1)[1:])).split(" ", 1)
     message = cat[1]
     ttl = int(cat[0])
+    try:
+        await event.delete()
+    except:
+        pass
     await sleep(ttl)
     await event.respond(message)
 
