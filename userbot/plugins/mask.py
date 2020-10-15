@@ -1,4 +1,4 @@
-"""
+ """
 credits to @mrconfused and @sandy1709
 """
 #    Copyright (C) 2020  sandeep.n(π.$)
@@ -19,13 +19,9 @@ from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 @bot.on(sudo_cmd(pattern="mask(?: |$)(.*)",allow_sudo=True))
 async def _(catbot):
     reply_message = await catbot.get_reply_message()
-    if reply_message:
-        if not reply_message.media:
-            await edit_or_reply(catbot ,"```reply to media message```")
-            return
-    else:
+    if not reply_message.media or not reply_message:
         await edit_or_reply(catbot ,"```reply to media message```")
-            return
+        return
     chat = "@hazmat_suit_bot"
     reply_message.sender
     if reply_message.sender.bot:
