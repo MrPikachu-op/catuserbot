@@ -9,32 +9,38 @@ from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
 from .. import process
-from ..utils import admin_cmd, edit_or_reply ,sudo_cmd
+from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
-@bot.on(admin_cmd(pattern="q(?: |$)(.*)",outgoing=True))
+@bot.on(admin_cmd(pattern="q(?: |$)(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="q(?: |$)(.*)", allow_sudo=True))
 async def stickerchat(catquotes):
     if catquotes.fwd_from:
         return
     reply = await catquotes.get_reply_message()
     if not reply:
-        await edit_or_reply(catquotes , "`I cant quote the message . reply to a message`")
+        await edit_or_reply(
+            catquotes, "`I cant quote the message . reply to a message`"
+        )
         return
     fetchmsg = reply.message
     repliedreply = await reply.get_reply_message()
     if reply.media and reply.media.document.mime_type in ("mp4"):
-        await edit_or_reply(catquotes ,"`this format is not supported now`")
+        await edit_or_reply(catquotes, "`this format is not supported now`")
         return
-    catevent = await edit_or_reply(catquotes , "`Making quote...`")
+    catevent = await edit_or_reply(catquotes, "`Making quote...`")
     user = (
-        await event.client.get_entity(reply.forward.sender) if reply.fwd_from else reply.sender
+        await event.client.get_entity(reply.forward.sender)
+        if reply.fwd_from
+        else reply.sender
     )
     res, catmsg = await process(fetchmsg, user, catquotes.client, reply, repliedreply)
     if not res:
         return
     catmsg.save("./temp/sticker.webp")
-    await catquotes.client.send_file(catquotes.chat_id, "./temp/sticker.webp", reply_to=reply)
+    await catquotes.client.send_file(
+        catquotes.chat_id, "./temp/sticker.webp", reply_to=reply
+    )
     await catevent.delete()
     os.remove("./temp/sticker.webp")
 
@@ -45,18 +51,18 @@ async def _(event):
     if event.fwd_from:
         return
     if not event.reply_to_msg_id:
-        await edit_or_reply(event ,"```Reply to any user message.```")
+        await edit_or_reply(event, "```Reply to any user message.```")
         return
     reply_message = await event.get_reply_message()
     if not reply_message.text:
-        await edit_or_reply(event ,"```Reply to text message```")
+        await edit_or_reply(event, "```Reply to text message```")
         return
     chat = "@QuotLyBot"
     reply_message.sender
     if reply_message.sender.bot:
-        await edit_or_reply(event ,"```Reply to actual users message.```")
+        await edit_or_reply(event, "```Reply to actual users message.```")
         return
-    catevent = await edit_or_reply(event ,"```Making a Quote```")
+    catevent = await edit_or_reply(event, "```Making a Quote```")
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
