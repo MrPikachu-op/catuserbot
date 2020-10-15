@@ -66,6 +66,17 @@ async def typewriter(typew):
         await asyncio.sleep(sleep_time)
 
 
+
+@bot.on(admin_cmd(pattern="repeat (\d*) (.*)",outgoing=True))
+@bot.on(sudo_cmd(pattern="repeat (\d*) (.*)",allow_sudo=True))
+async def _(event):
+    cat = ("".join(event.text.split(maxsplit=1)[1:])).split(" ", 1)
+    message = cat[1]
+    count = int(cat[0])
+    repmessage = (f"{message} ")* count
+    await asyncio.wait([event.respond(repmessage)])
+    await event.delete()
+    
 @bot.on(admin_cmd(pattern=f"meme", outgoing=True))
 @bot.on(sudo_cmd(pattern=f"meme", allow_sudo=True))
 async def meme(event):
@@ -220,10 +231,12 @@ CMD_HELP.update(
         \n  •  `.give`\
         \n\n**Functions :**\
         \n__The above two commands are animation memes meme by default takes ✈️ and give by default takes 🍭__\
+        \n\n**Syntax : **`.repeat count message`\
+        \n**Function : **try out and check Yourself `.repeat 5 hello`\
         \n\n**Syntax :** `.type`\
-        \n**Usage : **Just a small command to make your keyboard become a typewriter!\
+        \n**Function : **Just a small command to make your keyboard become a typewriter!\
         \n\n**Syntax :** `.sadmin`\
-        \n**Usage : **Fun animation of @admin!\
+        \n**Function : **Fun animation of @admin!\
         "
     }
 )
