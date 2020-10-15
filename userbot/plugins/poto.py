@@ -26,13 +26,14 @@ Type `.poto` for get **All profile pics of that User**
 """
 
 import asyncio
-from .. import CMD_HELP
+
 from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 
 name = "Profile Photos"
 
-@bot.on(admin_cmd(pattern="poto ?(.*)",outgoing=True))
-@bot.on(sudo_cmd(pattern="poto ?(.*)",allow_sudo=True))
+
+@bot.on(admin_cmd(pattern="poto ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="poto ?(.*)", allow_sudo=True))
 async def potocmd(event):
     """Gets the profile photos of replied users, channels or chats"""
     id = "".join(event.raw_text.split(maxsplit=1)[1:])
@@ -50,7 +51,9 @@ async def potocmd(event):
             send_photos = await event.client.download_media(photos[id - 1])
             await event.client.send_file(event.chat_id, send_photos)
         else:
-            await edit_or_reply(event , "No photo found of this NIBBA / NIBBI. Now u Die!")
+            await edit_or_reply(
+                event, "No photo found of this NIBBA / NIBBI. Now u Die!"
+            )
             await asyncio.sleep(2)
             return
     elif id.strip() == "all":
@@ -61,26 +64,28 @@ async def potocmd(event):
                 if u is True:
                     photo = await event.client.download_profile_photo(user.sender)
                 else:
-                    photo = await event.client.download_profile_photo(
-                        event.input_chat
-                    )
+                    photo = await event.client.download_profile_photo(event.input_chat)
                 await event.client.send_file(event.chat_id, photo)
             except a:
-                await edit_or_reply(event ,"**This user has no photos!**")
+                await edit_or_reply(event, "**This user has no photos!**")
                 return
     else:
         try:
             id = int(id)
             if id <= 0:
-                await edit_or_reply(event ,"```number Invalid!``` **Are you Comedy Me ?**")
+                await edit_or_reply(
+                    event, "```number Invalid!``` **Are you Comedy Me ?**"
+                )
                 return
         except BaseException:
-            await edit_or_reply(event ,"Are you comedy me ?")
+            await edit_or_reply(event, "Are you comedy me ?")
             return
         if int(id) <= (len(photos)):
             send_photos = await event.client.download_media(photos[id - 1])
             await event.client.send_file(event.chat_id, send_photos)
         else:
-            await edit_or_reply(event ,"No photo found of this NIBBA / NIBBI. Now u Die!")
+            await edit_or_reply(
+                event, "No photo found of this NIBBA / NIBBI. Now u Die!"
+            )
             await asyncio.sleep(2)
             return
