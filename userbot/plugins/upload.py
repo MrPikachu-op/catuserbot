@@ -191,7 +191,7 @@ async def uploadir(event):
 
 
 @bot.on(admin_cmd(pattern="uploadas(stream|vn|all) (.*)", outgoing=True))
-@bot.on(sudo_cmd(pattern="uploadas(stream|vn|all) (.*) ", allow_sudo=True))
+@bot.on(sudo_cmd(pattern="uploadas(stream|vn|all) (.*)", allow_sudo=True))
 async def uploadas(event):
     # For .uploadas command, allows you to specify some arguments for upload.
     type_of_upload = event.pattern_match.group(1)
