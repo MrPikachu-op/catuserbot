@@ -95,7 +95,9 @@ async def info(event):
         if args in CMD_HELP:
             await edit_or_reply(event, str(CMD_HELP[args]))
         else:
-            await edit_or_reply(event, "Please specify a valid plugin name.")
+            event = await edit_or_reply(event, "Please specify a valid plugin name.")
+            await asyncio.sleep(3)
+            await event.delete()
     else:
         string = "<b>Please specify which plugin do you want help for !!\
             \nNumber of plugins : </b><code>{count}</code>\
@@ -120,7 +122,7 @@ async def info(event):
         plugincount = 0
         for i in sorted(SUDO_LIST):
             plugincount += 1
-            string += f"{plugincount}) Command found in Plugin " + i + " are \n"
+            string += f"{plugincount}) Commands found in Plugin " + i + " are \n"
             for iter_list in SUDO_LIST[i]:
                 string += "    " + str(iter_list)
                 string += "\n"
@@ -153,8 +155,6 @@ async def info(event):
             await event.reply(
                 string.format(count=catcount, input_str=input_str), parse_mode="HTML"
             )
-            await asyncio.sleep(3)
-            await event.delete()
         else:
             reply = await event.reply(input_str + " is not a valid plugin!")
             await asyncio.sleep(3)
