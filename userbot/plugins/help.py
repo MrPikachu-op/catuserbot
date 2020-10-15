@@ -1,16 +1,17 @@
-import requests
 import asyncio
+
+import requests
 from telethon import functions
 
 from userbot import ALIVE_NAME
 
-from .. import CMD_HELP, CMD_LIST, SUDO_LIST,yaml_format
+from .. import CMD_HELP, CMD_LIST, SUDO_LIST, yaml_format
 from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "cat"
 
 
-@bot.on(admin_cmd(outgoing=True , pattern="help ?(.*)"))
+@bot.on(admin_cmd(outgoing=True, pattern="help ?(.*)"))
 async def cmd_list(event):
     reply_to_id = None
     if event.reply_to_msg_id:
@@ -54,7 +55,9 @@ async def cmd_list(event):
                 string += f"  ◆  <code>{i}</code>"
                 string += "\n"
                 catcount += 1
-            await event.edit(string.format(count=catcount, input_str=input_str),parse_mode="HTML")
+            await event.edit(
+                string.format(count=catcount, input_str=input_str), parse_mode="HTML"
+            )
         else:
             await event.edit(input_str + " is not a valid plugin!")
             await asyncio.sleep(3)
@@ -80,7 +83,7 @@ async def cmd_list(event):
                 string += "◆" + f"<code>{str(i)}</code>"
                 string += "   "
                 catcount += 1
-            await event.edit(string.format(count=catcount),parse_mode="HTML")
+            await event.edit(string.format(count=catcount), parse_mode="HTML")
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="info ?(.*)"))
@@ -103,9 +106,9 @@ async def info(event):
             string += "   "
             catcount += 1
         if event.from_id in Config.SUDO_USERS:
-            await event.reply(string.format(count=catcount),parse_mode="HTML")
+            await event.reply(string.format(count=catcount), parse_mode="HTML")
         else:
-            await event.edit(string.format(count=catcount),parse_mode="HTML")
+            await event.edit(string.format(count=catcount), parse_mode="HTML")
 
 
 @bot.on(sudo_cmd(allow_sudo=True, pattern="help(?: |$)(.*)"))
@@ -147,7 +150,9 @@ async def info(event):
                 string += f"  ◆  <code>{i}</code>"
                 string += "\n"
                 catcount += 1
-            await event.reply(string.format(count=catcount, input_str=input_str),parse_mode="HTML")
+            await event.reply(
+                string.format(count=catcount, input_str=input_str), parse_mode="HTML"
+            )
             await asyncio.sleep(3)
             await event.delete()
         else:
@@ -164,7 +169,8 @@ async def info(event):
             string += "◆" + f"<code>{str(i)}</code>"
             string += "   "
             catcount += 1
-        await event.reply(string.format(count=catcount),parse_mode="HTML")
+        await event.reply(string.format(count=catcount), parse_mode="HTML")
+
 
 @bot.on(admin_cmd(pattern="dc"))
 async def _(event):
