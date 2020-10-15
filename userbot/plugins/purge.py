@@ -4,15 +4,15 @@ from asyncio import sleep
 
 from telethon.errors import rpcbaseerrors
 
+from ..utils import admin_cmd, edit_or_reply, errors_handler, sudo_cmd
 from . import BOTLOG, BOTLOG_CHATID, CMD_HELP
-from ..utils import admin_cmd, errors_handler,edit_or_reply , sudo_cmd
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="purge$"))
 @bot.on(sudo_cmd(allow_sudo=True, pattern="purge$"))
 @errors_handler
 async def fastpurger(purg):
-    # For .purge command, purge all messages starting from the reply. 
+    # For .purge command, purge all messages starting from the reply.
     chat = await purg.get_input_chat()
     msgs = []
     itermsg = purg.client.iter_messages(chat, min_id=purg.reply_to_msg_id)
@@ -27,7 +27,8 @@ async def fastpurger(purg):
                 await purg.client.delete_messages(chat, msgs)
                 msgs = []
     else:
-        await edit_or_reply(purg ,
+        await edit_or_reply(
+            purg,
             "`No message specified.`",
         )
         return
