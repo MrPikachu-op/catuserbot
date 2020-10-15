@@ -1,29 +1,23 @@
 import asyncio
-import math
 import os
-import subprocess
 import time
-from datetime import datetime 
+from datetime import datetime
 
-from hachoir.metadata import extractMetadata
-from hachoir.parser import createParser
-from pySmartDL import SmartDL
-from telethon.tl.types import DocumentAttributeVideo
-
+from ..utils import admin_cmd, sudo_cmd
 from . import ALIVE_NAME, progress
-from ..utils import admin_cmd, humanbytes, sudo_cmd
 
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "thumb_image.jpg"
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "cat"
 
 
 @borg.on(admin_cmd(pattern="rename (.*)"))
-@borg.on(sudo_cmd(pattern="rename (.*)",allow_sudo=True))
+@borg.on(sudo_cmd(pattern="rename (.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    catevent = await edit_or_reply(event,
-        "`Renaming in process 🙄🙇‍♂️🙇‍♂️🙇‍♀️ It might take some time if file size is big`"
+    catevent = await edit_or_reply(
+        event,
+        "`Renaming in process 🙄🙇‍♂️🙇‍♂️🙇‍♀️ It might take some time if file size is big`",
     )
     input_str = event.pattern_match.group(1)
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
@@ -39,7 +33,7 @@ async def _(event):
             reply_message,
             downloaded_file_name,
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                progress(d, t, catevent, c_time, "trying to download",file_name)
+                progress(d, t, catevent, c_time, "trying to download", file_name)
             ),
         )
         end = datetime.now()
@@ -51,7 +45,9 @@ async def _(event):
         else:
             await catevent.edit("Error Occurred\n {}".format(input_str))
     else:
-        await catevent.edit("**Syntax : ** `.rename file.name` as reply to a Telegram media")
+        await catevent.edit(
+            "**Syntax : ** `.rename file.name` as reply to a Telegram media"
+        )
 
 
 @borg.on(admin_cmd(pattern="rnup (.*)"))
@@ -62,8 +58,9 @@ async def _(event):
     thumb = None
     if os.path.exists(thumb_image_path):
         thumb = thumb_image_path
-    catevent = await edit_or_reply(event,
-        "`Rename & Upload in process 🙄🙇‍♂️🙇‍♂️🙇‍♀️ It might take some time if file size is big`"
+    catevent = await edit_or_reply(
+        event,
+        "`Rename & Upload in process 🙄🙇‍♂️🙇‍♂️🙇‍♀️ It might take some time if file size is big`",
     )
     input_str = event.pattern_match.group(1)
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
@@ -87,7 +84,7 @@ async def _(event):
         if os.path.exists(downloaded_file_name):
             c_time = time.time()
             caat = await event.client.send_file(
-                event.chat_id, 
+                event.chat_id,
                 downloaded_file_name,
                 force_document=False,
                 supports_streaming=True,
@@ -95,7 +92,9 @@ async def _(event):
                 reply_to=event.message.id,
                 thumb=thumb,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                    progress(d, t, event, c_time, "trying to upload",downloaded_file_name)
+                    progress(
+                        d, t, event, c_time, "trying to upload", downloaded_file_name
+                    )
                 ),
             )
             end_two = datetime.now()
@@ -107,4 +106,6 @@ async def _(event):
         else:
             await catevent.edit("File Not Found {}".format(input_str))
     else:
-        await catevent.edit("**Syntax : **`.rnupload file.name` as reply to a Telegram media")
+        await catevent.edit(
+            "**Syntax : **`.rnupload file.name` as reply to a Telegram media"
+        )
