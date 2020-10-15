@@ -36,8 +36,8 @@ KANGING_STR = [
 ]
 
 
-@bot.on(admin_cmd(outgoing=True,pattern="kang ?(.*)"))
-@bot.on(sudo_cmd(pattern="kang ?(.*)",allow_sudo=True))
+@bot.on(admin_cmd(outgoing=True, pattern="kang ?(.*)"))
+@bot.on(sudo_cmd(pattern="kang ?(.*)", allow_sudo=True))
 async def kang(args):
     """ For .kang command, kangs stickers or creates new ones. """
     user = await bot.get_me()
@@ -54,11 +54,11 @@ async def kang(args):
     emoji = None
     if message and message.media:
         if isinstance(message.media, MessageMediaPhoto):
-            catevent = await edit_or_reply(args , f"`{random.choice(KANGING_STR)}`")
+            catevent = await edit_or_reply(args, f"`{random.choice(KANGING_STR)}`")
             photo = io.BytesIO()
             photo = await bot.download_media(message.photo, photo)
         elif "image" in message.media.document.mime_type.split("/"):
-            catevent = await edit_or_reply(args ,f"`{random.choice(KANGING_STR)}`")
+            catevent = await edit_or_reply(args, f"`{random.choice(KANGING_STR)}`")
             photo = io.BytesIO()
             await bot.download_file(message.media.document, photo)
             if (
@@ -68,7 +68,7 @@ async def kang(args):
                 emoji = message.media.document.attributes[1].alt
                 emojibypass = True
         elif "tgsticker" in message.media.document.mime_type:
-            catevent = await edit_or_reply(args ,f"`{random.choice(KANGING_STR)}`")
+            catevent = await edit_or_reply(args, f"`{random.choice(KANGING_STR)}`")
             await bot.download_file(message.media.document, "AnimatedSticker.tgs")
 
             attributes = message.media.document.attributes
@@ -80,10 +80,10 @@ async def kang(args):
             is_anim = True
             photo = 1
         else:
-            await edit_or_reply(args ,"`Unsupported File!`")
+            await edit_or_reply(args, "`Unsupported File!`")
             return
     else:
-        await edit_or_reply(args ,"`I can't kang that...`")
+        await edit_or_reply(args, "`I can't kang that...`")
         return
     if photo:
         splat = args.text.split()
@@ -310,21 +310,23 @@ def char_is_emoji(character):
     return character in emoji.UNICODE_EMOJI
 
 
-@bot.on(admin_cmd(pattern="stkrinfo$",outgoing=True))
-@bot.on(sudo_cmd(pattern="stkrinfo$",allow_sudo=True))
+@bot.on(admin_cmd(pattern="stkrinfo$", outgoing=True))
+@bot.on(sudo_cmd(pattern="stkrinfo$", allow_sudo=True))
 async def get_pack_info(event):
     if not event.is_reply:
-        await edit_or_reply(event ,"`I can't fetch info from nothing, can I ?!`")
+        await edit_or_reply(event, "`I can't fetch info from nothing, can I ?!`")
         return
     rep_msg = await event.get_reply_message()
     if not rep_msg.document:
-        await edit_or_reply(event ,"`Reply to a sticker to get the pack details`")
+        await edit_or_reply(event, "`Reply to a sticker to get the pack details`")
         return
     try:
         stickerset_attr = rep_msg.document.attributes[1]
-        catevent = await edit_or_reply(event ,"`Fetching details of the sticker pack, please wait..`")
+        catevent = await edit_or_reply(
+            event, "`Fetching details of the sticker pack, please wait..`"
+        )
     except BaseException:
-        await edit_or_reply(event ,"`This is not a sticker. Reply to a sticker.`")
+        await edit_or_reply(event, "`This is not a sticker. Reply to a sticker.`")
         return
     if not isinstance(stickerset_attr, DocumentAttributeSticker):
         await catevent.edit("`This is not a sticker. Reply to a sticker.`")
