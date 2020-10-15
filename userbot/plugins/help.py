@@ -171,9 +171,9 @@ async def info(event):
         else:
             await event.edit(string.format(count=catcount), parse_mode="HTML")
 
-        
+
 @bot.on(admin_cmd(pattern="dc$"))
-@bot.on(sudo_cmd(pattern="dc$",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="dc$", allow_sudo=True))
 async def _(event):
     result = await bot(functions.help.GetNearestDcRequest())
     result = (
@@ -186,4 +186,4 @@ async def _(event):
                                     \nDC5 : Singapore, SG\
                                     "
     )
-    await edit_or_reply(event , result)
+    await edit_or_reply(event, result)
