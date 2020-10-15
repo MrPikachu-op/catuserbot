@@ -1,30 +1,48 @@
-# This Source Code Form is subject to the terms of the Mozilla Public
-# License, v. 2.0. If a copy of the MPL was not distributed with this
-# file, You can obtain one at http://mozilla.org/MPL/2.0/.
-
-""" Command: .dab , .brain
-credit: lejend @r4v4n4
-"""
 import random
 from os import remove
 from random import choice
 from urllib import parse
-
+import nekos
 import requests
 from telethon import events, functions, types, utils
-
-from userbot.utils import admin_cmd
+import requests
+from PIL import Image
+from ..utils import admin_cmd , sudo_cmd
 
 BASE_URL = "https://headp.at/pats/{}"
-PAT_IMAGE = "pat.jpg"
+PAT_IMAGE = "pat.webp"
 
+@borg.on(admin_cmd(pattern="cat$"))
+@borg.on(sudo_cmd(pattern="cat$", allow_sudo=True))
+async def _(event):
+    try:
+        await event.delete()
+    except BaseException:
+        pass
+    reply_to_id = event.message
+    if event.reply_to_msg_id:
+        reply_to_id = await event.get_reply_message()
+    with open("temp.png", "wb") as f:
+        f.write(requests.get(nekos.cat()).content)
+    img = Image.open("temp.png")
+    img.save("temp.webp", "webp")
+    img.seek(0)
+    await event.client.send_file(event.chat_id, open("temp.webp", "rb"), reply_to=reply_to_id)
+    remove("temp.webp")
+    
 
+#credit to @r4v4n4
+#     
 def choser(cmd, pack, blacklist={}):
     docs = None
 
-    @borg.on(events.NewMessage(pattern=rf"\.{cmd}", outgoing=True))
+    @borg.on(admin_cmd(pattern="{cmd}$", outgoing=True))
+    @borg.on(sudo_cmd(pattern="{cmd}$", allow_sudo=True))
     async def handler(event):
-        await event.delete()
+        try:
+            await event.delete()
+        except BaseException:
+            pass
         nonlocal docs
         if docs is None:
             docs = [
@@ -68,22 +86,17 @@ choser(
 # By:- git: jaskaranSM tg: @Zero_cool7870
 
 
-@borg.on(admin_cmd(pattern="pat ?(.*)", outgoing=True))
+@borg.on(admin_cmd(pattern="pat$", outgoing=True))
+@borg.on(sudo_cmd(pattern="pat$", allow_sudo=True))
 async def lastfm(event):
-    if event.fwd_from:
-        return
-    username = event.pattern_match.group(1)
-    if not username and not event.reply_to_msg_id:
-        await event.edit("`Reply to a message or provide username`")
-        return
+    try:
+        await event.delete()
+    except BaseException:
+        pass
     resp = requests.get("http://headp.at/js/pats.json")
     pats = resp.json()
     pat = BASE_URL.format(parse.quote(choice(pats)))
-    await event.delete()
     with open(PAT_IMAGE, "wb") as f:
         f.write(requests.get(pat).content)
-    if username:
-        await borg.send_file(event.chat_id, PAT_IMAGE, caption=username)
-    else:
-        await borg.send_file(event.chat_id, PAT_IMAGE, reply_to=event.reply_to_msg_id)
+    await event.client.send_file(event.chat_id, PAT_IMAGE, reply_to=event.reply_to_msg_id)
     remove(PAT_IMAGE)
