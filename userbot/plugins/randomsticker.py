@@ -2,15 +2,17 @@ import random
 from os import remove
 from random import choice
 from urllib import parse
+
 import nekos
 import requests
-from telethon import events, functions, types, utils
-import requests
 from PIL import Image
-from ..utils import admin_cmd , sudo_cmd
+from telethon import functions, types, utils
+
+from ..utils import admin_cmd, sudo_cmd
 
 BASE_URL = "https://headp.at/pats/{}"
 PAT_IMAGE = "pat.webp"
+
 
 @borg.on(admin_cmd(pattern="cat$"))
 @borg.on(sudo_cmd(pattern="cat$", allow_sudo=True))
@@ -27,12 +29,14 @@ async def _(event):
     img = Image.open("temp.png")
     img.save("temp.webp", "webp")
     img.seek(0)
-    await event.client.send_file(event.chat_id, open("temp.webp", "rb"), reply_to=reply_to_id)
+    await event.client.send_file(
+        event.chat_id, open("temp.webp", "rb"), reply_to=reply_to_id
+    )
     remove("temp.webp")
-    
 
-#credit to @r4v4n4
-#     
+
+# credit to @r4v4n4
+#
 def choser(cmd, pack, blacklist={}):
     docs = None
 
@@ -98,5 +102,7 @@ async def lastfm(event):
     pat = BASE_URL.format(parse.quote(choice(pats)))
     with open(PAT_IMAGE, "wb") as f:
         f.write(requests.get(pat).content)
-    await event.client.send_file(event.chat_id, PAT_IMAGE, reply_to=event.reply_to_msg_id)
+    await event.client.send_file(
+        event.chat_id, PAT_IMAGE, reply_to=event.reply_to_msg_id
+    )
     remove(PAT_IMAGE)
