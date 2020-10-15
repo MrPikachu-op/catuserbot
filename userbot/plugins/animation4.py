@@ -272,7 +272,7 @@ async def _(event):
 
 
 @bot.on(admin_cmd(pattern=r"repe$", outgoing=True))
-@bot.on(sudo_cmd(pattern="rape$", allow_sudo=True))
+@bot.on(sudo_cmd(pattern="repe$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
