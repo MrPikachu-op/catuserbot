@@ -37,10 +37,11 @@ async def _(event):
 
 # credit to @r4v4n4
 
+
 @borg.on(admin_cmd(pattern="dab$", outgoing=True))
 @borg.on(sudo_cmd(pattern="dab$", allow_sudo=True))
 async def handler(event):
-    blacklist={
+    blacklist = {
         1653974154589768377,
         1653974154589768312,
         1653974154589767857,
@@ -75,10 +76,11 @@ async def handler(event):
         ]
     await event.respond(file=random.choice(docs))
 
+
 @borg.on(admin_cmd(pattern="brain$", outgoing=True))
 @borg.on(sudo_cmd(pattern="brain$", allow_sudo=True))
 async def handler(event):
-    blacklist={}
+    blacklist = {}
     try:
         await event.delete()
     except BaseException:
