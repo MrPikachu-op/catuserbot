@@ -31,7 +31,10 @@ async def _(event):
 @bot.on(admin_cmd(pattern="resend$"))
 @bot.on(sudo_cmd(pattern="resend$",allow_sudo=True))
 async def _(event):
-    await event.delete()
+    try:
+        await event.delete()
+    except:
+        pass
     m = await event.get_reply_message()
     if not m:
         return
