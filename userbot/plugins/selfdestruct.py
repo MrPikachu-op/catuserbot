@@ -1,7 +1,7 @@
 from asyncio import sleep
 
+from ..utils import admin_cmd, sudo_cmd
 from . import CMD_HELP
-from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
 @bot.on(admin_cmd(pattern="sdm (\d*) (.*)", outgoing=True))
@@ -25,7 +25,9 @@ async def selfdestruct(destroy):
     cat = ("".join(event.text.split(maxsplit=1)[1:])).split(" ", 1)
     message = cat[1]
     ttl = int(cat[0])
-    text = (message + f"\n\n`This message shall be self-destructed in {str(ttl)} seconds`")
+    text = (
+        message + f"\n\n`This message shall be self-destructed in {str(ttl)} seconds`"
+    )
     try:
         await destroy.delete()
     except:
@@ -45,4 +47,3 @@ CMD_HELP.update(
 "
     }
 )
- 
