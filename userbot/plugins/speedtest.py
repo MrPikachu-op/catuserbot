@@ -5,7 +5,9 @@ from datetime import datetime
 
 import speedtest
 
-from userbot.utils import admin_cmd
+
+from .. import CMD_HELP
+from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
 @borg.on(admin_cmd(pattern="speedtest ?(.*)"))
@@ -13,7 +15,7 @@ async def _(event):
     if event.fwd_from:
         return
     input_str = event.pattern_match.group(1)
-    as_text = True
+    as_text = False
     as_document = False
     if input_str == "image":
         as_document = False
