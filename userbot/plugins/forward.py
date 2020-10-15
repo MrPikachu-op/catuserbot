@@ -28,7 +28,16 @@ async def _(event):
         await event.client.forward_messages(event.chat_id, fwd_message)
         await event.delete()
 
-
+@bot.on(admin_cmd(pattern="resend$"))
+@bot.on(sudo_cmd(pattern="resend$",allow_sudo=True))
+async def _(event):
+    await event.delete()
+    m = await event.get_reply_message()
+    if not m:
+        return
+    await event.respond(m)
+    
+    
 @bot.on(admin_cmd(pattern=r"fpost\s+(.*)"))
 @bot.on(sudo_cmd(pattern="fpost\s+(.*)", allow_sudo=True))
 async def _(event):
@@ -50,8 +59,10 @@ CMD_HELP.update(
     {
         "forward": "**Plugin : **`forward`\
     \n\n**Synatax : **`frwd reply to any message`\
-    \n**Function :  **Enable Seen Counter in any message, to know how many users have seen your message\
+    \n**Function :  **__Enable Seen Counter in any message, to know how many users have seen your message__\
+    \n\n**Syntax : **`.resend reply to message`\
+    \n**Function : **__Just resend the replied message again in that chat__\
     \n\n**Syntax : **`.fpost text`\
-    \n**Function : **Split the word and forwards each letter from the messages cache if exists "
+    \n**Function : **__Split the word and forwards each letter from the messages cache if exists__"
     }
 )
