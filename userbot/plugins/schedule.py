@@ -8,7 +8,7 @@ from ..utils import admin_cmd, sudo_cmd
 @bot.on(sudo_cmd(pattern="schd (\d*) (.*)", allow_sudo=True))
 async def _(event):
     cat = ("".join(event.text.split(maxsplit=1)[1:])).split(" ", 1)
-    cat[1]
+    message = cat[1]
     ttl = int(cat[0])
     await sleep(ttl)
     await event.respond(message)
