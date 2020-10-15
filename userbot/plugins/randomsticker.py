@@ -36,38 +36,11 @@ async def _(event):
 
 
 # credit to @r4v4n4
-#
-def choser(cmd, pack, blacklist={}):
-    docs = None
 
-    @borg.on(admin_cmd(pattern="{cmd}$", outgoing=True))
-    @borg.on(sudo_cmd(pattern="{cmd}$", allow_sudo=True))
-    async def handler(event):
-        try:
-            await event.delete()
-        except BaseException:
-            pass
-        nonlocal docs
-        if docs is None:
-            docs = [
-                utils.get_input_document(x)
-                for x in (
-                    await borg(
-                        functions.messages.GetStickerSetRequest(
-                            types.InputStickerSetShortName(pack)
-                        )
-                    )
-                ).documents
-                if x.id not in blacklist
-            ]
-        await event.respond(file=random.choice(docs))
-
-
-choser("brain", "supermind")
-choser(
-    "dab",
-    "DabOnHaters",
-    {
+@borg.on(admin_cmd(pattern="dab$", outgoing=True))
+@borg.on(sudo_cmd(pattern="dab$", allow_sudo=True))
+async def handler(event):
+    blacklist={
         1653974154589768377,
         1653974154589768312,
         1653974154589767857,
@@ -82,8 +55,49 @@ choser(
         1653974154589767863,
         1653974154589767852,
         1653974154589768677,
-    },
-)
+    }
+    try:
+        await event.delete()
+    except BaseException:
+        pass
+    nonlocal docs
+    if docs is None:
+        docs = [
+            utils.get_input_document(x)
+            for x in (
+                await borg(
+                    functions.messages.GetStickerSetRequest(
+                        types.InputStickerSetShortName("DabOnHaters")
+                    )
+                )
+            ).documents
+            if x.id not in blacklist
+        ]
+    await event.respond(file=random.choice(docs))
+
+@borg.on(admin_cmd(pattern="brain$", outgoing=True))
+@borg.on(sudo_cmd(pattern="brain$", allow_sudo=True))
+async def handler(event):
+    blacklist={}
+    try:
+        await event.delete()
+    except BaseException:
+        pass
+    nonlocal docs
+    if docs is None:
+        docs = [
+            utils.get_input_document(x)
+            for x in (
+                await borg(
+                    functions.messages.GetStickerSetRequest(
+                        types.InputStickerSetShortName("supermind")
+                    )
+                )
+            ).documents
+            if x.id not in blacklist
+        ]
+    await event.respond(file=random.choice(docs))
+
 
 # HeadPat Module for Userbot (http://headp.at)
 # cmd:- .pat username or reply to msg
