@@ -1,5 +1,4 @@
-
-#credits to @mrconfused and @sandy1709
+# credits to @mrconfused and @sandy1709
 
 #    Copyright (C) 2020  sandeep.n(π.$)
 
@@ -11,21 +10,21 @@ from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 
-from . import CMD_HELP, awooify, lolice, baguette,iphonex
 from ..utils import admin_cmd, edit_or_reply, sudo_cmd
+from . import CMD_HELP, awooify, baguette, iphonex, lolice
 
 
 @bot.on(admin_cmd("mask ?(.*)"))
-@bot.on(sudo_cmd(pattern="mask(?: |$)(.*)",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="mask(?: |$)(.*)", allow_sudo=True))
 async def _(catbot):
     reply_message = await catbot.get_reply_message()
     if not reply_message.media or not reply_message:
-        await edit_or_reply(catbot ,"```reply to media message```")
+        await edit_or_reply(catbot, "```reply to media message```")
         return
     chat = "@hazmat_suit_bot"
     reply_message.sender
     if reply_message.sender.bot:
-        await edit_or_reply(catbot ,"```Reply to actual users message.```")
+        await edit_or_reply(catbot, "```Reply to actual users message.```")
         return
     event = await catbot.edit("```Processing```")
     async with catbot.client.conversation(chat) as conv:
@@ -48,7 +47,7 @@ async def _(catbot):
 
 
 @bot.on(admin_cmd(pattern="awooify(?: |$)(.*)"))
-@bot.on(sudo_cmd(pattern="awooify(?: |$)(.*)",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="awooify(?: |$)(.*)", allow_sudo=True))
 async def catbot(catmemes):
     replied = await catmemes.get_reply_message()
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
@@ -57,9 +56,9 @@ async def catbot(catmemes):
         await edit_or_reply(catmemes, "reply to a supported media file")
         return
     if replied.media:
-        catevent = await edit_or_reply(catmemes,"passing to telegraph...")
+        catevent = await edit_or_reply(catmemes, "passing to telegraph...")
     else:
-        await edit_or_reply(catmemes,"reply to a supported media file")
+        await edit_or_reply(catmemes, "reply to a supported media file")
         return
     try:
         cat = pybase64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
@@ -99,18 +98,18 @@ async def catbot(catmemes):
 
 
 @bot.on(admin_cmd(pattern="lolice(?: |$)(.*)"))
-@bot.on(sudo_cmd(pattern="lolice(?: |$)(.*)",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="lolice(?: |$)(.*)", allow_sudo=True))
 async def catbot(catmemes):
     replied = await catmemes.get_reply_message()
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     if not replied:
-        await edit_or_reply(catmemes,"reply to a supported media file")
+        await edit_or_reply(catmemes, "reply to a supported media file")
         return
     if replied.media:
-        catevent = await edit_or_reply(catmemes,"passing to telegraph...")
+        catevent = await edit_or_reply(catmemes, "passing to telegraph...")
     else:
-        await edit_or_reply(catmemes,"reply to a supported media file")
+        await edit_or_reply(catmemes, "reply to a supported media file")
         return
     try:
         cat = pybase64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
@@ -150,18 +149,18 @@ async def catbot(catmemes):
 
 
 @bot.on(admin_cmd(pattern="bun(?: |$)(.*)"))
-@bot.on(sudo_cmd(pattern="bun(?: |$)(.*)",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="bun(?: |$)(.*)", allow_sudo=True))
 async def catbot(catmemes):
     replied = await catmemes.get_reply_message()
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     if not replied:
-        await edit_or_reply(catmemes,"reply to a supported media file")
+        await edit_or_reply(catmemes, "reply to a supported media file")
         return
     if replied.media:
-        catevent = await edit_or_reply(catmemes,"passing to telegraph...")
+        catevent = await edit_or_reply(catmemes, "passing to telegraph...")
     else:
-        await edit_or_reply(catmemes,"reply to a supported media file")
+        await edit_or_reply(catmemes, "reply to a supported media file")
         return
     try:
         cat = pybase64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
@@ -201,18 +200,18 @@ async def catbot(catmemes):
 
 
 @bot.on(admin_cmd(pattern="iphx(?: |$)(.*)"))
-@bot.on(sudo_cmd(pattern="iphx(?: |$)(.*)",allow_sudo=True))
+@bot.on(sudo_cmd(pattern="iphx(?: |$)(.*)", allow_sudo=True))
 async def catbot(catmemes):
     replied = await catmemes.get_reply_message()
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     if not replied:
-        await edit_or_reply(catmemes,"reply to a supported media file")
+        await edit_or_reply(catmemes, "reply to a supported media file")
         return
     if replied.media:
-        catevent = await edit_or_reply(catmemes,"passing to telegraph...")
+        catevent = await edit_or_reply(catmemes, "passing to telegraph...")
     else:
-        await edit_or_reply(catmemes,"reply to a supported media file")
+        await edit_or_reply(catmemes, "reply to a supported media file")
         return
     try:
         cat = pybase64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
@@ -249,7 +248,6 @@ async def catbot(catmemes):
     cat = await iphonex(cat)
     await catevent.delete()
     await catmemes.client.send_file(catmemes.chat_id, cat, reply_to=replied)
-
 
 
 CMD_HELP.update(
