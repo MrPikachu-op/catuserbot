@@ -99,10 +99,10 @@ async def info(event):
     else:
         string = "<b>Please specify which plugin do you want help for !!\
             \nNumber of plugins : </b><code>{count}</code>\
-            \n<b>Usage : </code>.info<code> <plugin name>\n\n"
+            \n<b>Usage : </b><code>.info</code> <plugin name>\n\n"
         catcount = 0
         for i in sorted(CMD_HELP):
-            string += "◆" + f"<code>{str(i)}</code>"
+            string += "◆ " + f"<code>{str(i)}</code>"
             string += "   "
             catcount += 1
         if event.from_id in Config.SUDO_USERS:
