@@ -100,8 +100,10 @@ async def _(event):
             os.remove(downloaded_file_name)
             ms_two = (end_two - end).seconds
             await catevent.edit(
-                f"**Downloaded file in {ms_one} seconds.**\n**Uploaded in {ms_two} seconds.**"
+                f"`Downloaded file in {ms_one} seconds.`\n`Uploaded in {ms_two} seconds.`"
             )
+            await asyncio.sleep(3)
+            await catevent.delete()
         else:
             await catevent.edit("File Not Found {}".format(input_str))
     else:
