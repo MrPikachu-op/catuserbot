@@ -84,7 +84,7 @@ async def cmd_list(event):
             await event.edit(string.format(count=catcount), parse_mode="HTML")
 
 
-@bot.on(sudo_cmd(allow_sudo=True, pattern="help(?: |$)(.*)"))
+@bot.on(sudo_cmd(allow_sudo=True, pattern="help ?(.*)"))
 async def info(event):
     input_str = event.pattern_match.group(1)
     if input_str == "text":
