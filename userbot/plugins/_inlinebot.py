@@ -72,7 +72,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                         note_data += markdown_note[prev:to_check]
                         prev = match.start(1) - 1
             else:
-                note_data += markdown_note[prev:]
+                note_data += markdown_note
             message_text = note_data.strip()
             tl_ib_buttons = ibuild_keyboard(buttons)
             result = builder.article(
