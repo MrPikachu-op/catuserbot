@@ -24,7 +24,7 @@ from .. import CMD_HELP
 from ..utils import admin_cmd, edit_or_reply, progress, sudo_cmd
 
 
-@bot.on(admin_cmd(pattern="yt(a|v) (.*)",outgoing=True))
+@bot.on(admin_cmd(pattern="yt(a|v) (.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="yt(a|v) (.*)", allow_sudo=True))
 async def download_video(v_url):
     """ For .ytdl command, download media from YouTube and many other sites. """
