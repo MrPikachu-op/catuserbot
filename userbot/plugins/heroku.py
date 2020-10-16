@@ -133,7 +133,7 @@ async def dyno_usage(dyno):
     quota = result["account_quota"]
     quota_used = result["quota_used"]
 
-    # - Used - 
+    # - Used -
     remaining_quota = quota - quota_used
     percentage = math.floor(remaining_quota / quota * 100)
     minutes_remaining = remaining_quota / 60
