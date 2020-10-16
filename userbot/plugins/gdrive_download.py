@@ -9,15 +9,15 @@ from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 from . import CMD_HELP
 
 
-async def download_file_from_google_drive(id):
+async def download_file_from_google_drive(gid):
     URL = "https://docs.google.com/uc?export=download"
 
     session = requests.Session()
 
-    response = session.get(URL, params={"id": id}, stream=True)
+    response = session.get(URL, params={"id": gid}, stream=True)
     token = await get_confirm_token(response)
     if token:
-        params = {"id": id, "confirm": token}
+        params = {"id": gid, "confirm": token}
         response = session.get(URL, params=params, stream=True)
 
     headers = response.headers
