@@ -113,17 +113,17 @@ async def waifutxt(text, chat_id, reply_to_id, bot, borg):
         await cat.delete()
 
 
-async def sanga_seperator(list):
-    for i in list:
+async def sanga_seperator(sanga_list):
+    for i in sanga_list:
         if i.startswith("🔗"):
-            list.remove(i)
+            sanga_list.remove(i)
     s = 0
-    for i in list:
+    for i in sanga_list:
         if i.startswith("Username History"):
             break
         s += 1
-    usernames = list[s:]
-    names = list[:s]
+    usernames = sanga_list[s:]
+    names = sanga_list[:s]
     return names, usernames
 
 
