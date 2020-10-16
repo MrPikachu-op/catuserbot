@@ -3,7 +3,6 @@ Syntax: .exec Code"""
 import asyncio
 import io
 import sys
-import time
 import traceback
 
 from .. import CMD_HELP
@@ -15,7 +14,6 @@ from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 async def _(event):
     if event.fwd_from or event.via_bot_id:
         return
-    PROCESS_RUN_TIME = 100
     cmd = "".join(event.text.split(maxsplit=1)[1:])
     reply_to_id = event.message.id
     if event.reply_to_msg_id:
@@ -46,7 +44,6 @@ async def _(event):
 async def _(event):
     if event.fwd_from or event.via_bot_id:
         return
-    PROCESS_RUN_TIME = 100
     cmd = "".join(event.text.split(maxsplit=1)[1:])
     reply_to_id = event.message.id
     if event.reply_to_msg_id:
