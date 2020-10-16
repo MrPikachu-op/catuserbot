@@ -50,8 +50,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             prev = 0
             note_data = ""
             buttons = []
-            if BTN_URL_REGEX.finditer(markdown_note):
-                for match in BTN_URL_REGEX.finditer(markdown_note):
+            for match in BTN_URL_REGEX.finditer(markdown_note):
                     # Check if btnurl is escaped
                     n_escapes = 0
                     to_check = match.start(1) - 1
@@ -72,7 +71,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                         note_data += markdown_note[prev:to_check]
                         prev = match.start(1) - 1
             else:
-                note_data += markdown_note
+                note_data += markdown_note[prev:]
             message_text = note_data.strip()
             tl_ib_buttons = ibuild_keyboard(buttons)
             result = builder.article(
