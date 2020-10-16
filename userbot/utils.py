@@ -455,15 +455,13 @@ def register(**args):
 
 
 def command(**args):
-    args["func"] = lambda e: e.via_bot_id is None
+        args["func"] = lambda e: e.via_bot_id is None
 
-    stack = inspect.stack()
-    previous_stack_frame = stack[1]
-    file_test = Path(previous_stack_frame.filename)
-    file_test = file_test.stem.replace(".py", "")
-    if 1 == 0:
-        return print("stupidity at its best")
-    else:
+        stack = inspect.stack()
+        previous_stack_frame = stack[1]
+        file_test = Path(previous_stack_frame.filename)
+        file_test = file_test.stem.replace(".py", "")
+
         pattern = args.get("pattern", None)
         allow_sudo = args.get("allow_sudo", None)
         allow_edited_updates = args.get("allow_edited_updates", False)
