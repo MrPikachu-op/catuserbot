@@ -65,8 +65,7 @@ async def yt_search(cat):
             video_link = "https://www.youtube.com/watch?v=" + user_data[0]
         if video_link:
             return video_link
-        else:
-            return "Couldnt fetch results"
+        return "Couldnt fetch results"
     except:
         return "Couldnt fetch results"
 
