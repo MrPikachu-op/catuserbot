@@ -22,7 +22,6 @@ async def _(catbot):
         await edit_or_reply(catbot, "```reply to media message```")
         return
     chat = "@hazmat_suit_bot"
-    reply_message.sender
     if reply_message.sender.bot:
         await edit_or_reply(catbot, "```Reply to actual users message.```")
         return
