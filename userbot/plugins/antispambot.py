@@ -173,9 +173,9 @@ async def caschecker(cas):
     await catevent.edit(text)
 
 
-def banchecker(id):
+def banchecker(user_id):
     try:
-        casurl = "https://api.cas.chat/check?user_id={}".format(id)
+        casurl = "https://api.cas.chat/check?user_id={}".format(user_id)
         data = get(casurl).json()
     except Exception as e:
         LOGS.info(e)
@@ -183,10 +183,10 @@ def banchecker(id):
     return bool(data and data["ok"])
 
 
-def spamchecker(id):
+def spamchecker(user_id):
     ban = None
     if spamwatch:
-        ban = spamwatch.get_ban(id)
+        ban = spamwatch.get_ban(user_id)
     return bool(ban)
 
 
