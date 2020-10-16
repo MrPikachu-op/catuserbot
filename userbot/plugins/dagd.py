@@ -75,20 +75,21 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
-    input = event.pattern_match.group(1)
-    await edit_or_reply(event, "[ㅤㅤㅤㅤㅤㅤㅤ](" + input + ")")
+    input_str = event.pattern_match.group(1)
+    await edit_or_reply(event, "[ㅤㅤㅤㅤㅤㅤㅤ](" + input_str + ")")
 
 
 CMD_HELP.update(
     {
-        "ping": "**Syntax :** `.dns link`\
-    \n**Usage : **Shows you Domain Name System(dns) of the given link . example `.dns google.com` or `.dns github.cm`\
-    \n\n**Syntax : **`.url link`\
-    \n**Usage : **shortens the given link\
-    \n\n**Syntax : **`.unshort link`\
-    \n**Usage : **unshortens the given short link\
-    \n\n**Syntax : **`.hl` <link>\
-    \n**Usage : **Hide the given link\
+        "dagd": "**Plugin : **`dagd`\
+        \n\n**Syntax :** `.dns link`\
+        \n**Function : **__Shows you Domain Name System(dns) of the given link . example `.dns google.com` or `.dns github.cm`__\
+        \n\n**Syntax : **`.url link`\
+        \n**Function : **__shortens the given link__\
+        \n\n**Syntax : **`.unshort link`\
+        \n**Function : **__unshortens the given short link__\
+        \n\n**Syntax : **`.hl` <link>\
+        \n**Function : **__Hide the given link__\
     "
     }
 )
