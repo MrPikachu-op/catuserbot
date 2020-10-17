@@ -196,7 +196,7 @@ async def _(event):
     input_str = event.pattern_match.group(1)
     if input_str == "true":
         type = True
-    else input_str == "false":
+    else:
         type = False
     if HELPTYPE is True:
         if type is True:
