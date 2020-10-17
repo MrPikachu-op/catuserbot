@@ -1,4 +1,4 @@
-#CatUserbot module for getting the weather of a city.
+# CatUserbot module for getting the weather of a city.
 
 # Copyright (C) 2019 The Raphielscape Company LLC.
 #
@@ -8,7 +8,6 @@
 import io
 import json
 import logging
-import time
 from datetime import datetime
 
 import aiohttp
@@ -202,7 +201,7 @@ async def _(event):
         response_api_zero = await session.get(sample_url.format(input_str))
         response_api = await response_api_zero.read()
         with io.BytesIO(response_api) as out_file:
-            await event.reply(f"**City : **`{input_str}`" , file=out_file)
+            await event.reply(f"**City : **`{input_str}`", file=out_file)
     try:
         await event.delete()
     except:
