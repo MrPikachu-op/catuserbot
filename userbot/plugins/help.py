@@ -190,18 +190,22 @@ async def _(event):
     await edit_or_reply(event, result)
 
 
-@bot.on(admin_cmd(outgoing=True, pattern="setinline (True|False)"))
+@bot.on(admin_cmd(outgoing=True, pattern="setinline (true|false)"))
 async def _(event):
     global HELPTYPE
-    type = bool(event.pattern_match.group(1))
+    input_str = event.pattern_match.group(1)
+    if input_str is "true":
+        type = True
+    elif input_str is "false":
+        type = False
     if HELPTYPE is True:
-        if type is True:
+        if type:
             await event.edit("`inline mode is already enabled`")
         else:
             HELPTYPE = type
             await event.edit("`inline mode is disabled`")
     else:
-        if type is True:
+        if type:
             HELPTYPE = type
             await event.edit("`inline mode is enabled`")
         else:
