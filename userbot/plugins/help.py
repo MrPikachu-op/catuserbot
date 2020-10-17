@@ -177,8 +177,9 @@ async def info(event):
 @bot.on(sudo_cmd(pattern="dc$", allow_sudo=True))
 async def _(event):
     result = await bot(functions.help.GetNearestDcRequest())
-    result = (yaml_format(result)
-                + "\n\n**List Of Telegram Data Centres:**\
+    result = (
+        yaml_format(result)
+        + "\n\n**List Of Telegram Data Centres:**\
                 \nDC1 : Miami FL, USA\
                 \nDC2 : Amsterdam, NL\
                 \nDC3 : Miami FL, USA\
@@ -188,6 +189,7 @@ async def _(event):
     )
     await edit_or_reply(event, result)
 
+
 @bot.on(admin_cmd(outgoing=True, pattern="setinline (True|False)"))
 async def _(event):
     global HELPTYPE
@@ -196,13 +198,11 @@ async def _(event):
         if type:
             await event.edit("`inline mode is already enabled`")
         else:
-            HELPTYPE = type 
-            await event.edit("`inline mode is disabled`") 
+            HELPTYPE = type
+            await event.edit("`inline mode is disabled`")
     else:
         if type:
             HELPTYPE = type
             await event.edit("`inline mode is enabled`")
         else:
-            await event.edit("`inline mode is already disabled`") 
-
-
+            await event.edit("`inline mode is already disabled`")
