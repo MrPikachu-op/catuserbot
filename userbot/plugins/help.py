@@ -199,13 +199,13 @@ async def _(event):
     elif input_str is "false":
         type = False
     if HELPTYPE is True:
-        if type:
+        if type is True:
             await event.edit("`inline mode is already enabled`")
         else:
             HELPTYPE = type
             await event.edit("`inline mode is disabled`")
     else:
-        if type:
+        if type is True:
             HELPTYPE = type
             await event.edit("`inline mode is enabled`")
         else:
