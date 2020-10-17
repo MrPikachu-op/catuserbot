@@ -1,4 +1,4 @@
-import asyncio
+ import asyncio
 
 import requests
 from telethon import functions
@@ -194,9 +194,9 @@ async def _(event):
 async def _(event):
     global HELPTYPE
     input_str = event.pattern_match.group(1)
-    if input_str is "true":
+    if input_str == "true":
         type = True
-    elif input_str is "false":
+    else input_str == "false":
         type = False
     if HELPTYPE is True:
         if type is True:
